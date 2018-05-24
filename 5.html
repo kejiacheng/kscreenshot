@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <meta name="viewport" charset="utf-8" content="width=device-width,user-scalable=no，initial-scale=1"/>
+ <style type="text/css">
+ 	.table{
+ 		display: table;
+ 	}
+ 	.table-row{
+ 		display: table-row;
+ 	}
+ 	.wrapper{
+ 		height: 500px;
+ 		border: 1px solid #dedede;
+ 	}
+ 	.up{
+ 		height: 100%;
+ 	}
+ 	.overflow{
+ 		overflow: auto;
+ 		height: 100%;
+ 	}
+ 	.height{
+ 		height: 2000px;
+ 	}
+ /*	.test{
+ 		position: absolute;
+ 		top: 50%;
+ 		left: 50%;
+ 		width: 200px;
+ 		height: 200px;
+ 		box-shadow: 9999px 9999px 0 9999px rgba(0,0,0,0.3);
+ 	}*/
+ 	.kankan{
+ 		position: fixed;
+ 		background: transparent;
+ 		box-shadow: 0 0 0 9999px rgba(0,0,0,0.3);
+ 	}
+
+</style>
+<body>
+<div class="test" style="word-wrap: break-word;">
+	fsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasdfsdfsdfasd
+</div>
+<div>你麻痹</div>
+<img src="./cursor.png">
+<input type="text" name="">
+<input type="file" class="qwe">
+<span style="color: red">万日大神前往请勿打扰</span>
+<script src="./jquery-1.12.1.min.js"></script>
+<script type="text/javascript" src='./html2canvas.min.js'></script>
+<script type="text/javascript">
+var is = false
+	
+
+	$(document).keydown(function (e) {
+		if (e.keyCode === 65 && e.shiftKey && !is) {
+			is = true
+			$('body').css('cursor', 'url("./cursor.png"), auto')
+			html2canvas(document.body).then(function(canvas) {
+				canvas.style.position = 'fixed'
+				canvas.style.top = 0
+				canvas.style.left = 0
+				canvas.id = 'xixi'
+			    document.body.appendChild(canvas);
+			   
+			    var startX, startY
+
+			    canvas.onmousedown = function look (e) {
+			    	console.log('keke')
+			    	if (e.button !== 0) {
+			    		return
+			    	}
+			    	startX = e.clientX
+			    	startY = e.clientY
+			    	$('.kankan').remove()
+			    	$('body').append('<div class="kankan"></div>')
+
+			    	$(document).mousemove(function (e) {
+			    		var kankan = $('.kankan')
+				
+			    		kankan.css(
+			    			{
+			    				height: Math.abs(e.clientY - startY) + 'px', 
+			    				width: Math.abs(e.clientX - startX) + 'px', 
+			    				top: Math.min(startY, e.clientY) + 'px', 
+			    				left: Math.min(startX, e.clientX) + 'px'
+			    			}
+			    		)
+			    	}).unbind('mouseup').mouseup(function (e) {
+			    		
+			    		$(document).mousedown(function (e) {
+				    		if (e.button === 2) {
+				    			$('.kankan').remove()
+				    			$('#hehe').remove()
+			    				canvas.onmousedown = look
+			    			
+			    				$(document).contextmenu(function (e) {
+			    					console.log(e)
+					    			e.preventDefault()
+					    		})
+			    			}
+			    			console.log(123)
+			    		})
+			    		
+			    		$(document).unbind('mousemove')
+			    		canvas.onmousedown = null
+			    		
+			    		$('#hehe').remove()
+			    		$('body').append('<canvas id="hehe" width="'+ Math.abs(e.clientX - startX) +'" height="'+ Math.abs(e.clientY - startY) +'" style="position:fixed;top:'+ Math.min(startY, e.clientY) + 'px;left:'+ Math.min(startX, e.clientX) +'px"></canvas>')
+			    		$(document).unbind('mouseup')
+			    	})
+			    }
+			});
+		}
+	})
+
+	$(document).keydown(function (e) {
+		if (e.keyCode === 27) {
+			$('body').css('cursor', 'default')
+			$('#xixi').remove()
+			$('#hehe').remove()
+			$('.kankan').remove()
+			$(document).unbind('mousemove').unbind('mouseup')
+		}
+	})
+</script>
+</body>
+</html>
