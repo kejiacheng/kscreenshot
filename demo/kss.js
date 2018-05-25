@@ -10,6 +10,7 @@ let kss = (function () {
         return this
     }
     me.kss = null
+    me.kssRectangle = null
     //截图状态
     me.isScreenshot = false
     /*
@@ -20,6 +21,10 @@ let kss = (function () {
     me.drawingStatus = null
     me.startX = null
     me.startY = null
+    me.width = null
+    me.height = null
+    me.dotSize = 6
+    me.lineSize = 1
 
     kss.prototype.init = function (key) {
         const that = this
@@ -72,6 +77,7 @@ let kss = (function () {
                 'box-shadow': '0 0 0 9999px rgba(0,0,0,0.3)'
             })
             kssRectangle.id = 'kssRectangle'
+            me.kssRectangle = kssRectangle
             document.body.appendChild(kssRectangle)
 
             document.addEventListener('mousemove', drawing)
@@ -97,11 +103,15 @@ let kss = (function () {
             document.addEventListener('mouseup', cancelDrawingStatus)
 
             let canvas = document.createElement('canvas')
+            me.width = Math.abs(e.clientX - me.startX)
+            me.height = Math.abs(e.clientY - me.startY)
+            me.startX = Math.min(me.startX, e.clientX)
+            me.startY = Math.min(me.startY, e.clientY)
             css(canvas, {
-                height: Math.abs(e.clientY - me.startY) + 'px',
-                width: Math.abs(e.clientX - me.startX) + 'px',
-                top: Math.min(me.startY, e.clientY) + 'px',
-                left: Math.min(me.startX, e.clientX) + 'px',
+                height: me.height + 'px',
+                width: me.width + 'px',
+                top: me.startY + 'px',
+                left: me.startX + 'px',
                 cursor: 'move',
                 position: 'fixed'
             })
@@ -112,6 +122,15 @@ let kss = (function () {
             })
             me.kss.removeEventListener('mousedown', startDrawDown)
             document.removeEventListener('mouseup', endDraw)
+
+            createDragDom(
+                me.kssRectangle,
+                canvas,
+                me.dotSize,
+                me.lineSize,
+                '#488ff9',
+                me
+            )
         }
 
         function cancelDrawingStatus (e) {
