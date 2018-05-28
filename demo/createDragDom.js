@@ -1,4 +1,6 @@
-function createDragDom (dom, canvas, dotSize, lineSize, bg, me) {
+import { css } from './util'
+
+export default function createDragDom (dom, canvas, dotSize, lineSize, bg, me) {
     const lineList = [
         {name: 'n',style: {top: '-' + (lineSize / 2) + 'px', left: 0, width: '100%', height: (lineSize / 2) + 'px'}},
         {name: 's',style: {bottom: '-' + (lineSize / 2) + 'px', left: 0, width: '100%', height: (lineSize / 2) + 'px'}},

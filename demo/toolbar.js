@@ -1,4 +1,4 @@
 // function createToolbar () {
 //
 // }
-export var a = 1
+export let a = 1

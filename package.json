@@ -1,0 +1,30 @@
+{
+  "name": "kss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run check && cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --color --progress --hot --inline --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kejiacheng/kss.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kejiacheng/kss/issues"
+  },
+  "homepage": "https://github.com/kejiacheng/kss#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.1",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.9.1",
+    "webpack-cli": "^2.1.4"
+  }
+}

@@ -1,10 +1,10 @@
-function css (dom, obj) {
+export function css (dom, obj) {
     for (let i in obj) {
         dom.style[i] = obj[i]
     }
 }
 
-function remove(dom) {
+export function remove(dom) {
     if (dom instanceof HTMLElement) {
         dom.parentNode.removeChild(dom)
     } else if (dom instanceof HTMLCollection) {
@@ -14,6 +14,6 @@ function remove(dom) {
     }
 }
 
-function domType(dom) {
+export function domType(dom) {
     return Object.prototype.toString.call(dom)
 }
