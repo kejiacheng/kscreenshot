@@ -1,6 +1,8 @@
 import { css } from './util'
+import drawMiddleImage from './toolbar/middleImage/drawMiddleImage'
+import clearMiddleImage from './toolbar/middleImage/clearMiddleImage'
 
-export default function createDragDom (dom, canvas, dotSize, lineSize, bg, me) {
+export default function createDragDom (dom, dotSize, lineSize, bg, me) {
     const lineList = [
         {name: 'n',style: {top: '-' + (lineSize / 2) + 'px', left: 0, width: '100%', height: (lineSize / 2) + 'px'}},
         {name: 's',style: {bottom: '-' + (lineSize / 2) + 'px', left: 0, width: '100%', height: (lineSize / 2) + 'px'}},
@@ -24,19 +26,19 @@ export default function createDragDom (dom, canvas, dotSize, lineSize, bg, me) {
     dotList.forEach((it) => {
         dom.appendChild(createDot(it.name, it.style, dotSize, bg, it.id))
     })
-    bindCornerEvent('swkssDot', dom, canvas, me)
-    bindCornerEvent('sekssDot', dom, canvas, me)
-    bindCornerEvent('nwkssDot', dom, canvas, me)
-    bindCornerEvent('nekssDot', dom, canvas, me)
+    bindCornerEvent('swkssDot', dom, me)
+    bindCornerEvent('sekssDot', dom, me)
+    bindCornerEvent('nwkssDot', dom, me)
+    bindCornerEvent('nekssDot', dom, me)
 
-    bindSurroundEvent('horizontal', 'ekssDot', dom, canvas, me)
-    bindSurroundEvent('horizontal', 'wkssDot', dom, canvas, me)
-    bindSurroundEvent('horizontal', 'ekssLine', dom, canvas, me)
-    bindSurroundEvent('horizontal', 'wkssLine', dom, canvas, me)
-    bindSurroundEvent('vertical', 'nkssDot', dom, canvas, me)
-    bindSurroundEvent('vertical', 'skssDot', dom, canvas, me)
-    bindSurroundEvent('vertical', 'nkssLine', dom, canvas, me)
-    bindSurroundEvent('vertical', 'skssLine', dom, canvas, me)
+    bindSurroundEvent('horizontal', 'ekssDot', dom, me)
+    bindSurroundEvent('horizontal', 'wkssDot', dom, me)
+    bindSurroundEvent('horizontal', 'ekssLine', dom, me)
+    bindSurroundEvent('horizontal', 'wkssLine', dom, me)
+    bindSurroundEvent('vertical', 'nkssDot', dom, me)
+    bindSurroundEvent('vertical', 'skssDot', dom, me)
+    bindSurroundEvent('vertical', 'nkssLine', dom, me)
+    bindSurroundEvent('vertical', 'skssLine', dom, me)
 }
 
 function createDot (type, style, size, bg) {
@@ -69,8 +71,12 @@ function createLine (type, style, size, bg) {
     return dom
 }
 
-function bindCornerEvent (name, dom, canvas, me) {
+function bindCornerEvent (name, dom, me) {
     document.getElementById(name).addEventListener('mousedown', function (event) {
+        if (me.isEdit) {
+            return
+        }
+        clearMiddleImage(me)
         document.addEventListener('mousemove', mousemoveEvent)
 
         let currentLeft = approximate(me.startX, me.width, event.clientX)
@@ -79,16 +85,49 @@ function bindCornerEvent (name, dom, canvas, me) {
         //将起始点设置为对角
         me.startX = 2 * (me.startX + me.width / 2) - currentLeft;
         me.startY = 2 * (me.startY + me.height /2 ) - currentTop;
-
+        let startX = event.clientX
+        let startY = event.clientY
         function mousemoveEvent (e) {
+            let height = Math.abs(e.clientY - me.startY)
+            let width = Math.abs(e.clientX - me.startX)
+            let top = Math.min(me.startY, e.clientY)
+            let left = Math.min(me.startX, e.clientX)
             let style = {
-                height: Math.abs(e.clientY - me.startY) + 'px',
-                width: Math.abs(e.clientX - me.startX) + 'px',
-                top: Math.min(me.startY, e.clientY) + 'px',
-                left: Math.min(me.startX, e.clientX) + 'px'
+                height: height + 'px',
+                width: width + 'px',
+                top: top + 'px',
+                left: left + 'px'
             }
             css(dom, style)
-            css(canvas, style)
+  
+            let currentStartX = left
+            let currentStartY = top
+     
+            let exceed = me.toolbarWidth - width - currentStartX
+       
+            if (exceed > 0) {
+                css(me.toolbar, {
+                    right: '-' + exceed + 'px'
+                })
+            } else {
+                css(me.toolbar, {
+                    right: 0 + 'px'
+                })
+            }
+
+            let clientHeight = document.documentElement.clientHeight
+
+            let bottomSurplus = clientHeight - currentStartY - height - me.toolbarMarginTop - me.toolbarHeight
+
+            if (bottomSurplus < 0) {
+                css(me.toolbar, {
+                    top: '-' + (me.toolbarHeight + me.toolbarMarginTop) + 'px'
+                })
+            } else {
+                css(me.toolbar, {
+                    top: height + me.toolbarMarginTop + 'px'
+                })
+            }
         }
         document.addEventListener('mouseup', mouseupEvent)
 
@@ -101,12 +140,17 @@ function bindCornerEvent (name, dom, canvas, me) {
 
             document.removeEventListener('mousemove', mousemoveEvent)
             document.removeEventListener('mouseup', mouseupEvent)
+            drawMiddleImage(me)
         }
     })
 }
 
-function bindSurroundEvent (type, name, dom, canvas, me) {
+function bindSurroundEvent (type, name, dom, me) {
     document.getElementById(name).addEventListener('mousedown', function (event) {
+        if (me.isEdit) {
+            return
+        }
+        clearMiddleImage(me)
         document.addEventListener('mousemove', mousemoveEvent)
         let currentLeft = approximate(me.startX, me.width, event.clientX)
         let currentTop = approximate(me.startY, me.height, event.clientY)
@@ -116,22 +160,57 @@ function bindSurroundEvent (type, name, dom, canvas, me) {
         } else if (type === 'vertical') {
             me.startY = 2 * (me.startY + me.height /2 ) - currentTop;
         }
+        let startX = event.clientX
+        let startY = event.clientY
         function mousemoveEvent(e) {
+            let height = Math.abs(e.clientY - me.startY)
+            let width = Math.abs(e.clientX - me.startX)
+            let top = Math.min(me.startY, e.clientY)
+            let left = Math.min(me.startX, e.clientX)
             let style
             if (type === 'horizontal') {
                 style = {
-                    width: Math.abs(e.clientX - me.startX) + 'px',
-                    left: Math.min(me.startX, e.clientX) + 'px'
+                    width: width + 'px',
+                    left: left + 'px'
                 }
             } else if (type === 'vertical') {
                 style = {
-                    height: Math.abs(e.clientY - me.startY) + 'px',
-                    top: Math.min(me.startY, e.clientY) + 'px',
+                    height: height + 'px',
+                    top: top + 'px',
                 }
             }
 
             css(dom, style)
-            css(canvas, style)
+            let currentStartX = left
+            let currentStartY = top
+     
+            if (type === 'horizontal') {
+                let exceed = me.toolbarWidth - width - currentStartX
+           
+                if (exceed > 0) {
+                    css(me.toolbar, {
+                        right: '-' + exceed + 'px'
+                    })
+                } else {
+                    css(me.toolbar, {
+                        right: 0 + 'px'
+                    })
+                }
+            } else if (type === 'vertical') {
+                let clientHeight = document.documentElement.clientHeight
+
+                let bottomSurplus = clientHeight - currentStartY - height - me.toolbarMarginTop - me.toolbarHeight
+
+                if (bottomSurplus < 0) {
+                    css(me.toolbar, {
+                        top: '-' + (me.toolbarHeight + me.toolbarMarginTop) + 'px'
+                    })
+                } else {
+                    css(me.toolbar, {
+                        top: height + me.toolbarMarginTop + 'px'
+                    })
+                }
+            }
         }
 
         document.addEventListener('mouseup', mouseupEvent)
@@ -147,10 +226,12 @@ function bindSurroundEvent (type, name, dom, canvas, me) {
 
             document.removeEventListener('mousemove', mousemoveEvent)
             document.removeEventListener('mouseup', mouseupEvent)
+            drawMiddleImage(me)
         }
     })
 }
 
+//获取鼠标位置最近坐标点
 function approximate (start, thickness, current) {
     if (Math.abs(current - start) >= Math.abs(current - start - thickness)) {
         return start + thickness

@@ -2,6 +2,11 @@
 import html2canvas from './html2canvas.min.js'
 import { css, remove, domType } from './util'
 import createDragDom from './createDragDom.js'
+import createToolbar from './toolbar/toolbar.js'
+import drawMiddleImage from './toolbar/middleImage/drawMiddleImage'
+import clearMiddleImage from './toolbar/middleImage/clearMiddleImage'
+import endAndClear from './toolbar/endAndClear'
+
 let kss = (function () {
     const me = this
 
@@ -13,8 +18,9 @@ let kss = (function () {
         }
 
         this.kss = null
-        this.kssRectangle = null
+        this.kssScreenShotWrapper = null
         this.rectangleCanvas = null
+        this.toolbar = null
         //截图状态
         this.isScreenshot = false
         /*
@@ -23,12 +29,17 @@ let kss = (function () {
         * 3: 放开左键，结束状态
         * */
         this.drawingStatus = null
+        this.imgBase64 = null
+        this.isEdit = false
         this.startX = null
         this.startY = null
         this.width = null
         this.height = null
-        this.dotSize = 8
-        this.lineSize = 4
+        this.dotSize = 6
+        this.lineSize = 2
+        this.toolbarWidth = 200
+        this.toolbarHeight = 30
+        this.toolbarMarginTop = 5
         
         this.startDrawDown = (e) => {
             const that = this
@@ -45,16 +56,25 @@ let kss = (function () {
             that.startX = e.clientX
             that.startY = e.clientY
             //移除并添加
-            remove(document.getElementById('kssRectangle'))
-            let kssRectangle = document.createElement('div')
-            css(kssRectangle, {
+            remove(document.getElementById('kssScreenShotWrapper'))
+            let kssScreenShotWrapper = document.createElement('div')
+            kssScreenShotWrapper.id = 'kssScreenShotWrapper'
+            css(kssScreenShotWrapper, {
                 position: 'fixed',
                 background: 'transparent',
-                'box-shadow': '0 0 0 9999px rgba(0,0,0,0.3)'
+                'box-shadow': '0 0 0 9999px rgba(0, 0, 0, 0.3)'
             })
-            kssRectangle.id = 'kssRectangle'
-            that.kssRectangle = kssRectangle
-            document.body.appendChild(kssRectangle)
+            that.kssScreenShotWrapper = kssScreenShotWrapper
+            let kssRectangle = document.createElement('div')
+            css(kssRectangle, {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%'
+            })
+            kssScreenShotWrapper.appendChild(kssRectangle)
+            document.body.appendChild(kssScreenShotWrapper)
           
             document.addEventListener('mousemove', that.drawing)
             document.addEventListener('mouseup', that.endDraw)
@@ -63,9 +83,9 @@ let kss = (function () {
         this.drawing = (e) => {
             const that = this
             that.drawingStatus = 2
-            let kssRectangle = document.getElementById('kssRectangle')
+            let kssScreenShotWrapper = document.getElementById('kssScreenShotWrapper')
     
-            css(kssRectangle, {
+            css(kssScreenShotWrapper, {
                 height: Math.abs(e.clientY - that.startY) + 'px',
                 width: Math.abs(e.clientX - that.startX) + 'px',
                 top: Math.min(that.startY, e.clientY) + 'px',
@@ -87,32 +107,65 @@ let kss = (function () {
             that.startX = Math.min(that.startX, e.clientX)
             that.startY = Math.min(that.startY, e.clientY)
             css(canvas, {
-                height: that.height + 'px',
-                width: that.width + 'px',
-                top: that.startY + 'px',
-                left: that.startX + 'px',
+                height: '100%',
+                width: '100%',
+                top: 0,
+                left: 0,
                 cursor: 'move',
-                position: 'fixed'
+                position: 'absolute'
             })
             canvas.id = 'rectangleCanvas'
-            document.body.appendChild(canvas)
+            that.kssScreenShotWrapper.appendChild(canvas)
             that.rectangleCanvas = canvas
             canvas.addEventListener('mousedown', function (event) {
+                if (that.isEdit) {
+                    return
+                }
+                clearMiddleImage(that)
                 let startX = event.clientX
                 let startY = event.clientY
                 document.addEventListener('mousemove', canvasMoveEvent)
                 document.addEventListener('mouseup', canvasUpEvent)
     
                 function canvasMoveEvent (e) {
-                    css(that.kssRectangle, {
+                    css(that.kssScreenShotWrapper, {
                         top: that.startY + e.clientY - startY + 'px',
                         left: that.startX + e.clientX - startX + 'px'
                     })
     
-                    css(canvas, {
-                        top: that.startY + e.clientY - startY + 'px',
-                        left: that.startX + e.clientX - startX + 'px'
-                    })
+                    // css(canvas, {
+                    //     top: that.startY + e.clientY - startY + 'px',
+                    //     left: that.startX + e.clientX - startX + 'px'
+                    // })
+
+                    let currentStartX = that.startX + e.clientX - startX
+                    let currentStartY = that.startY + e.clientY - startY
+                   
+                    let exceed = that.toolbarWidth - that.width - currentStartX
+           
+                    if (exceed > 0) {
+                        css(that.toolbar, {
+                            right: '-' + exceed + 'px'
+                        })
+                    } else {
+                        css(that.toolbar, {
+                            right: 0 + 'px'
+                        })
+                    }
+
+                    let clientHeight = document.documentElement.clientHeight
+
+                    let bottomSurplus = clientHeight - currentStartY - that.height - that.toolbarMarginTop - that.toolbarHeight
+
+                    if (bottomSurplus < 0) {
+                        css(that.toolbar, {
+                            top: '-' + (that.toolbarHeight + that.toolbarMarginTop) + 'px'
+                        })
+                    } else {
+                        css(that.toolbar, {
+                            top: that.height + that.toolbarMarginTop + 'px'
+                        })
+                    }
                 }
     
                 function canvasUpEvent (e) {
@@ -120,19 +173,21 @@ let kss = (function () {
                     that.startX = that.startX + e.clientX - startX
                     document.removeEventListener('mousemove', canvasMoveEvent)
                     document.removeEventListener('mouseup', canvasUpEvent)
+                    drawMiddleImage(that)
                 }
             })
             that.kss.removeEventListener('mousedown', that.startDrawDown)
             document.removeEventListener('mouseup', that.endDraw)
     
             createDragDom(
-                that.kssRectangle,
-                canvas,
+                that.kssScreenShotWrapper,
                 that.dotSize,
                 that.lineSize,
                 '#488ff9',
                 that
             )
+            drawMiddleImage(that)
+            that.toolbar = createToolbar(that.toolbarWidth, that.toolbarHeight, that.toolbarMarginTop, that)
         }
 
         this.preventContextMenu = (e) => {
@@ -142,12 +197,12 @@ let kss = (function () {
         this.cancelDrawingStatus = (e) => {
             const that = this
             if (e.button === 2) {
-        
-                remove(that.kssRectangle)
-                remove(that.rectangleCanvas)
-                that.kssRectangle = null
+                
+                remove(that.kssScreenShotWrapper)
+                that.kssScreenShotWrapper = null
                 that.rectangleCanvas = null
                 that.drawingStatus = null
+                that.isEdit = false
                 that.kss.addEventListener('mousedown', that.startDrawDown)
                 document.removeEventListener('contextmenu', that.preventContextMenu)
                 document.addEventListener('contextmenu', that.preventContextMenu)
@@ -180,7 +235,7 @@ let kss = (function () {
 
     kss.prototype.start = function () {
         const that = this
-        html2canvas(document.body)
+        html2canvas(document.body, {useCORS:true})
             .then((canvas) => {
                 that.kss = canvas
                 css(canvas, {
@@ -202,22 +257,7 @@ let kss = (function () {
 
         function endScreenShot (e) {
             if (e.keyCode === 27) {
-                css(document.body, {
-                    cursor: 'default',
-                    'user-select': 'text'
-                })
-             
-                that.kss && remove(that.kss)
-                that.kssRectangle && remove(that.kssRectangle)
-                that.rectangleCanvas && remove(that.rectangleCanvas)
-                that.kss = null 
-                that.kssRectangle = null
-                that.rectangleCanvas = null
-                that.drawingStatus = null 
-                that.isScreenshot = false
-                document.removeEventListener('keydown', that.endScreenShot)
-                document.removeEventListener('contextmenu', that.preventContextMenu)
-                document.removeEventListener('mouseup', that.cancelDrawingStatus)
+                endAndClear(that)
             }
         }
     }
