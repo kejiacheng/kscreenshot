@@ -21,14 +21,19 @@ let kss = (function () {
         this.kssScreenShotWrapper = null
         this.rectangleCanvas = null
         this.toolbar = null
+        //存储当前快照的元素
+        this.currentImgDom = null
         //截图状态
         this.isScreenshot = false
+        //快照组
+        this.snapshootList = []
         /*
         * 1: 点下左键，开始状态
         * 2: 鼠标移动，进行状态
         * 3: 放开左键，结束状态
         * */
         this.drawingStatus = null
+        this.currentToolType = null
         this.imgBase64 = null
         this.isEdit = false
         this.startX = null
@@ -43,6 +48,8 @@ let kss = (function () {
         
         this.startDrawDown = (e) => {
             const that = this
+            document.addEventListener('mouseup', that.cancelDrawingStatus)
+            document.addEventListener('contextmenu', that.preventContextMenu)
             //当不是鼠标左键时立即返回
             if (e.button !== 0) {
                 return
@@ -99,8 +106,6 @@ let kss = (function () {
           
             document.removeEventListener('mousemove', that.drawing)
     
-            document.addEventListener('mouseup', that.cancelDrawingStatus)
-    
             let canvas = document.createElement('canvas')
             that.width = Math.abs(e.clientX - that.startX)
             that.height = Math.abs(e.clientY - that.startY)
@@ -132,11 +137,6 @@ let kss = (function () {
                         top: that.startY + e.clientY - startY + 'px',
                         left: that.startX + e.clientX - startX + 'px'
                     })
-    
-                    // css(canvas, {
-                    //     top: that.startY + e.clientY - startY + 'px',
-                    //     left: that.startX + e.clientX - startX + 'px'
-                    // })
 
                     let currentStartX = that.startX + e.clientX - startX
                     let currentStartY = that.startY + e.clientY - startY
@@ -186,27 +186,47 @@ let kss = (function () {
                 '#488ff9',
                 that
             )
+            let img = document.createElement('img')
+            css(img, {
+                width: '100%',
+                height: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                display: 'none'
+
+            })
+            that.kssScreenShotWrapper.appendChild(img)
+            that.currentImgDom = img
             drawMiddleImage(that)
             that.toolbar = createToolbar(that.toolbarWidth, that.toolbarHeight, that.toolbarMarginTop, that)
         }
 
         this.preventContextMenu = (e) => {
+            console.log(12312321)
             e.preventDefault()
         }
 
         this.cancelDrawingStatus = (e) => {
             const that = this
             if (e.button === 2) {
-                
+                if (that.drawingStatus === null) {
+                    document.removeEventListener('mouseup', that.cancelDrawingStatus)
+                    setTimeout(function () {
+                        document.removeEventListener('contextmenu', that.preventContextMenu)
+                    }, 0)
+                    
+                    endAndClear(that)
+                    return
+                }
                 remove(that.kssScreenShotWrapper)
                 that.kssScreenShotWrapper = null
                 that.rectangleCanvas = null
                 that.drawingStatus = null
                 that.isEdit = false
+                that.snapshootList = []
+                that.currentToolType = null
                 that.kss.addEventListener('mousedown', that.startDrawDown)
-                document.removeEventListener('contextmenu', that.preventContextMenu)
-                document.addEventListener('contextmenu', that.preventContextMenu)
-                document.removeEventListener('mouseup', that.cancelDrawingStatus)
             }
         }
 

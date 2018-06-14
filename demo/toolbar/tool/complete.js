@@ -21,10 +21,10 @@ export default function complete (me) {
 
     completeBT.addEventListener('click', function () {
         me.isEdit = true
-
-        endAndClear(me)
-        copy(me.imgBase64)
+        
+        copy(me.snapshootList[me.snapshootList.length - 1])
         download(me)
+        endAndClear(me)
     })
 
     return completeBT

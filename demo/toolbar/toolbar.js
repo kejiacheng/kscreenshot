@@ -1,6 +1,8 @@
 import { css } from '../util'
 import complete from './tool/complete'
-import arrow from './tool/arrow'
+import arrowBT from './tool/arrowBT'
+import backBT from './tool/backBT'
+import drawLineBT from './tool/drawLineBT'
 
 export default function createToolbar (toolbarWidth, toolbarHeight, toolbarMarginTop, me) {
     let toolbar = document.createElement('div')
@@ -36,7 +38,9 @@ export default function createToolbar (toolbarWidth, toolbarHeight, toolbarMargi
     }
 
     toolbar.appendChild(complete(me))
-    toolbar.appendChild(arrow(me))
+    toolbar.appendChild(arrowBT(me))
+    toolbar.appendChild(backBT(me))
+    toolbar.appendChild(drawLineBT(me))
     
     me.kssScreenShotWrapper.appendChild(toolbar)
 

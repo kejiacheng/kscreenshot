@@ -1,5 +1,5 @@
 export default function download (me) {
-    let imgUrl = me.imgBase64
+    let imgUrl = me.snapshootList[me.snapshootList.length - 1]
     let a = document.createElement('a')
     if ('download' in a) {
         a.href = imgUrl

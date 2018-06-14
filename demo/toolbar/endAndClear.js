@@ -12,9 +12,14 @@ export default function endAndClear (me) {
     me.kssScreenShotWrapper = null
     me.drawingStatus = null
     me.toolbar = null
+    me.currentToolType = null
+    me.snapshootList = []
     me.isScreenshot = false
     me.isEdit = false
     document.removeEventListener('keydown', me.endScreenShot)
-    document.removeEventListener('contextmenu', me.preventContextMenu)
+    setTimeout(function () {
+        document.removeEventListener('contextmenu', me.preventContextMenu)
+    }, 0)
+    
     document.removeEventListener('mouseup', me.cancelDrawingStatus)
 }
