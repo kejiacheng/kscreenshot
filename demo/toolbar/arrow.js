@@ -56,7 +56,7 @@ export default function arrow (startPos, endPos, me) {
         context.lineTo(cX, cY)
         context.lineTo(bX, bY)
         context.lineTo(startX, startY)
-        context.fillStyle = "red"
+        context.fillStyle = me.toolbarColor
         context.fill();
         context.closePath()
     } else if ((startX < endX && startY > endY) || (startX > endX && startY < endY)) {
@@ -102,7 +102,7 @@ export default function arrow (startPos, endPos, me) {
         context.lineTo(cX, cY)
         context.lineTo(bX, bY)
         context.lineTo(startX, startY)
-        context.fillStyle = "red"
+        context.fillStyle = me.toolbarColor
         context.fill();
         context.closePath()
     } else if (startX === endX) {
@@ -137,7 +137,7 @@ export default function arrow (startPos, endPos, me) {
         context.lineTo(cX, cY)
         context.lineTo(bX, bY)
         context.lineTo(startX, startY)
-        context.fillStyle = "red"
+        context.fillStyle = me.toolbarColor
         context.fill();
         context.closePath()
     } else if (startY === endY) {
@@ -172,7 +172,7 @@ export default function arrow (startPos, endPos, me) {
         context.lineTo(cX, cY)
         context.lineTo(bX, bY)
         context.lineTo(startX, startY)
-        context.fillStyle = "red"
+        context.fillStyle = me.toolbarColor
         context.fill()
         context.closePath()
     }

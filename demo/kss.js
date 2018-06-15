@@ -42,9 +42,16 @@ let kss = (function () {
         this.height = null
         this.dotSize = 6
         this.lineSize = 2
-        this.toolbarWidth = 200
+        //工具栏样式
+        this.toolbarWidth = 250
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
+        this.toolbarColor = 'red'
+
+        //工具栏事件
+        this.toolmousedown = null
+        this.toolmousemove = null
+        this.toolmouseup = null
         
         this.startDrawDown = (e) => {
             const that = this
@@ -123,7 +130,7 @@ let kss = (function () {
             that.kssScreenShotWrapper.appendChild(canvas)
             that.rectangleCanvas = canvas
             canvas.addEventListener('mousedown', function (event) {
-                if (that.isEdit) {
+                if (that.isEdit || event.button === 2) {
                     return
                 }
                 clearMiddleImage(that)
@@ -226,6 +233,9 @@ let kss = (function () {
                 that.isEdit = false
                 that.snapshootList = []
                 that.currentToolType = null
+                that.toolmousedown = null
+                that.toolmousemove = null
+                that.toolmouseup = null
                 that.kss.addEventListener('mousedown', that.startDrawDown)
             }
         }

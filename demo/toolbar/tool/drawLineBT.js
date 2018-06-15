@@ -24,22 +24,30 @@ export default function drawLineBT (me) {
         }
      
         me.currentToolType = 'drawLine'
+       
+       if (me.toolmousedown) {
+            me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)
+            document.removeEventListener('mousemove', me.toolmousemove)
+            document.removeEventListener('mouseup', me.toolmouseup)
+        }
 
         me.rectangleCanvas.addEventListener('mousedown', drawLineMousedownEvent)
+        me.toolmousedown= drawLineMousedownEvent
 
         function drawLineMousedownEvent (e) {
-            document.removeEventListener('mousedown', me.arrowMousedownEvent)
-            document.removeEventListener('mousemove', me.arrowMousemoveEvent)
-            document.removeEventListener('mouseup', me.arrowMouseupEvent)
-     
+            if (e.button === 2) {
+                return
+            }
             let context = me.rectangleCanvas.getContext("2d")
             context.beginPath()
             context.moveTo(e.clientX - me.startX, e.clientY - me.startY)
             context.lineWidth = 10
-            context.strokeStyle="red";
+            context.strokeStyle = me.toolbarColor
      
             document.addEventListener('mousemove', drawLineMousemoveEvent)
             document.addEventListener('mouseup', drawLineMouseupEvent)
+            me.toolmousemove = drawLineMousemoveEvent
+            me.toolmouseup = drawLineMouseupEvent
 
             function drawLineMousemoveEvent (e) {
                 context.lineTo(e.clientX - me.startX, e.clientY - me.startY)
@@ -48,18 +56,11 @@ export default function drawLineBT (me) {
             
             function drawLineMouseupEvent (e) {
                 context.closePath()
-
-                makeSnapShoot(me)
-
                 document.removeEventListener('mousemove', drawLineMousemoveEvent)
                 document.removeEventListener('mouseup', drawLineMouseupEvent)
+                makeSnapShoot(me)
             }
-
-            me.drawLineMousemoveEvent = drawLineMousemoveEvent
-            me.drawLineMouseupEvent = drawLineMouseupEvent
         }
-
-        me.drawLineMousedownEvent = drawLineMousedownEvent
     })
 
     return drawLineBT

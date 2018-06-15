@@ -1,6 +1,5 @@
 import { css, remove } from '../../util'
 import arrow from '../arrow'
-import drawMiddleImage from '../middleImage/drawMiddleImage'
 import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
 
@@ -17,7 +16,7 @@ export default function arrowBT (me) {
     })
     let arrowImg = document.createElement('img')
     arrowImg.src = '../../assets/imgs/arrow.png'
-
+    me.arrowBT = arrowBT
     css(arrowImg, {
         width: '20px',
         height: '20px',
@@ -32,24 +31,29 @@ export default function arrowBT (me) {
         if (me.currentToolType === 'arrow') {
             return
         }
-
+    
         me.currentToolType = 'arrow'
+     
+        if (me.toolmousedown) {
+            me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)
+            document.removeEventListener('mousemove', me.toolmousemove)
+            document.removeEventListener('mouseup', me.toolmouseup)
+        }
 
         me.rectangleCanvas.addEventListener('mousedown', arrowMousedownEvent)
-        
+        me.toolmousedown= arrowMousedownEvent
+
         function arrowMousedownEvent (e) {
-            document.removeEventListener('mousedown', me.drawLineMousedownEvent)
-            document.removeEventListener('mousemove', me.drawLineMousemoveEvent)
-            document.removeEventListener('mouseup', me.drawLineMouseupEvent)
-            // if (e.button === 2) {
-            //     return
-            // }
+            if (e.button === 2) {
+                return
+            }
             let startX = e.clientX
             let startY = e.clientY
             
             document.addEventListener('mousemove', arrowMousemoveEvent)
             document.addEventListener('mouseup', arrowMouseupEvent)
-
+            me.toolmousemove = arrowMousemoveEvent
+            me.toolmouseup = arrowMouseupEvent
             function arrowMousemoveEvent (e) {
                 backToPreImg(me)
                 let endX = e.clientX
@@ -79,18 +83,11 @@ export default function arrowBT (me) {
                     document.removeEventListener('mouseup', arrowMouseupEvent)
                     return
                 }
-
-                makeSnapShoot(me)
-                
                 document.removeEventListener('mousemove', arrowMousemoveEvent)
                 document.removeEventListener('mouseup', arrowMouseupEvent)
+                makeSnapShoot(me)
             }
-
-            me.arrowMousemoveEvent = arrowMousemoveEvent
-            me.arrowMouseupEvent = arrowMouseupEvent
         }
-
-        me.arrowMousedownEvent = arrowMousedownEvent
     })
 
     return arrowBT

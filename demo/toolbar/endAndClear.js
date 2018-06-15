@@ -16,6 +16,9 @@ export default function endAndClear (me) {
     me.snapshootList = []
     me.isScreenshot = false
     me.isEdit = false
+    me.toolmousedown = null
+    me.toolmousemove = null
+    me.toolmouseup = null
     document.removeEventListener('keydown', me.endScreenShot)
     setTimeout(function () {
         document.removeEventListener('contextmenu', me.preventContextMenu)
