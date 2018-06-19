@@ -4,7 +4,7 @@ import arrowBT from './tool/arrowBT'
 import backBT from './tool/backBT'
 import drawLineBT from './tool/drawLineBT'
 import rectBT from './tool/rectBT'
-import circleBT from './tool/circleBT'
+import ellipseBT from './tool/ellipseBT'
 
 export default function createToolbar (toolbarWidth, toolbarHeight, toolbarMarginTop, me) {
     let toolbar = document.createElement('div')
@@ -38,13 +38,13 @@ export default function createToolbar (toolbarWidth, toolbarHeight, toolbarMargi
             top: '-' + (toolbarHeight + toolbarMarginTop) + 'px'
         })
     }
-
+    
     toolbar.appendChild(complete(me))
-    toolbar.appendChild(arrowBT(me))
     toolbar.appendChild(backBT(me))
+    toolbar.appendChild(arrowBT(me))
     toolbar.appendChild(drawLineBT(me))
     toolbar.appendChild(rectBT(me))
-    toolbar.appendChild(circleBT(me))
+    toolbar.appendChild(ellipseBT(me))
     
     me.kssScreenShotWrapper.appendChild(toolbar)
 

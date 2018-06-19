@@ -88,10 +88,32 @@ function bindCornerEvent (name, dom, me) {
         let startX = event.clientX
         let startY = event.clientY
         function mousemoveEvent (e) {
-            let height = Math.abs(e.clientY - me.startY)
-            let width = Math.abs(e.clientX - me.startX)
-            let top = Math.min(me.startY, e.clientY)
-            let left = Math.min(me.startX, e.clientX)
+            let clientHeight = document.documentElement.clientHeight
+            let clientWidth = document.documentElement.clientWidth
+            let clientX = e.clientX
+            let clientY = e.clientY
+            
+            if (clientX < 0) {
+                clientX = 0
+            }
+
+            if (clientX > clientWidth) {
+                clientX = clientWidth
+            }
+
+            if (clientY < 0) {
+                clientY = 0
+            }
+
+            if (clientY > clientHeight) {
+                clientY = clientHeight
+            }
+
+            let height = Math.abs(clientY - me.startY)
+            let width = Math.abs(clientX - me.startX)
+            let top = Math.min(me.startY, clientY)
+            let left = Math.min(me.startX, clientX)
+
             let style = {
                 height: height + 'px',
                 width: width + 'px',
@@ -114,8 +136,6 @@ function bindCornerEvent (name, dom, me) {
                     right: 0 + 'px'
                 })
             }
-
-            let clientHeight = document.documentElement.clientHeight
 
             let bottomSurplus = clientHeight - currentStartY - height - me.toolbarMarginTop - me.toolbarHeight
 
@@ -163,10 +183,31 @@ function bindSurroundEvent (type, name, dom, me) {
         let startX = event.clientX
         let startY = event.clientY
         function mousemoveEvent(e) {
-            let height = Math.abs(e.clientY - me.startY)
-            let width = Math.abs(e.clientX - me.startX)
-            let top = Math.min(me.startY, e.clientY)
-            let left = Math.min(me.startX, e.clientX)
+            let clientHeight = document.documentElement.clientHeight
+            let clientWidth = document.documentElement.clientWidth
+            let clientX = e.clientX
+            let clientY = e.clientY
+            
+            if (clientX < 0) {
+                clientX = 0
+            }
+
+            if (clientX > clientWidth) {
+                clientX = clientWidth
+            }
+
+            if (clientY < 0) {
+                clientY = 0
+            }
+
+            if (clientY > clientHeight) {
+                clientY = clientHeight
+            }
+
+            let height = Math.abs(clientY - me.startY)
+            let width = Math.abs(clientX - me.startX)
+            let top = Math.min(me.startY, clientY)
+            let left = Math.min(me.startX, clientX)
             let style
             if (type === 'horizontal') {
                 style = {

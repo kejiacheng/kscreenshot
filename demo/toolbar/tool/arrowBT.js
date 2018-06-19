@@ -6,6 +6,7 @@ import makeSnapShoot from '../makeSnapShoot'
 export default function arrowBT (me) {
     let arrowBT = document.createElement('span')
     arrowBT.id = 'kssArrowBT'
+    arrowBT.title = '箭头工具'
     css(arrowBT, {
         display: 'inline-block',
         width: '30px',

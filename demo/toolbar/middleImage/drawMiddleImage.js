@@ -9,5 +9,4 @@ export default function drawMiddleImage (me) {
     me.imgBase64 = dataURL
     me.snapshootList[0] = dataURL
     me.currentImgDom.src = me.imgBase64
-    console.log(dataURL)
 } 

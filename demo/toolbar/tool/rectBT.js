@@ -5,17 +5,27 @@ import makeSnapShoot from '../makeSnapShoot'
 export default function rectBT (me) {
     let rectBT = document.createElement('span')
     rectBT.id = 'kssRectBT'
-    rectBT.innerHTML = '方形'
+    rectBT.title = '方形工具'
 
     css(rectBT, {
         display: 'inline-block',
-        width: '40px',
+        width: '30px',
         height: '30px',
-        'line-height': '30px',
         'text-align': 'center',
         float: 'right',
         cursor: 'pointer'
     })
+
+    let rectImg = document.createElement('img')
+    rectImg.src = '../../assets/imgs/rect.png'
+    me.rectBT = rectBT
+    css(rectImg, {
+        width: '20px',
+        height: '20px',
+        'margin-top': '5px'
+    })
+
+    rectBT.appendChild(rectImg)
 
     rectBT.addEventListener('click', function () {
         me.isEdit = true

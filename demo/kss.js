@@ -43,7 +43,7 @@ let kss = (function () {
         this.dotSize = 6
         this.lineSize = 2
         //工具栏样式
-        this.toolbarWidth = 250
+        this.toolbarWidth = 200
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
         this.toolbarColor = 'red'
@@ -97,27 +97,88 @@ let kss = (function () {
         this.drawing = (e) => {
             const that = this
             that.drawingStatus = 2
-            let kssScreenShotWrapper = document.getElementById('kssScreenShotWrapper')
     
-            css(kssScreenShotWrapper, {
-                height: Math.abs(e.clientY - that.startY) + 'px',
-                width: Math.abs(e.clientX - that.startX) + 'px',
-                top: Math.min(that.startY, e.clientY) + 'px',
-                left: Math.min(that.startX, e.clientX) + 'px'
+            let clientHeight = document.documentElement.clientHeight
+            let clientWidth = document.documentElement.clientWidth
+            let clientX = e.clientX
+            let clientY = e.clientY
+            
+            if (clientX < 0) {
+                clientX = 0
+            }
+
+            if (clientX > clientWidth) {
+                clientX = clientWidth
+            }
+
+            if (clientY < 0) {
+                clientY = 0
+            }
+
+            if (clientY > clientHeight) {
+                clientY = clientHeight
+            }
+            
+            css(that.kssScreenShotWrapper, {
+                height: Math.abs(clientY - that.startY) + 'px',
+                width: Math.abs(clientX - that.startX) + 'px',
+                top: Math.min(that.startY, clientY) + 'px',
+                left: Math.min(that.startX, clientX) + 'px'
             })
         }
 
         this.endDraw = (e) => {
+            console.log(e.button)
+            if (e.button !== 0) {
+                return
+            }
             const that = this
             that.drawingStatus = 3
           
+            if (that.startX === e.clientX && that.startY === e.clientY) {
+                let clientHeight = document.documentElement.clientHeight
+                let clientWidth = document.documentElement.clientWidth
+                that.startX = 2
+                that.startY = 2
+                that.height = clientHeight - 4
+                that.width = clientWidth - 4
+                css(that.kssScreenShotWrapper, {
+                    height: that.height + 'px',
+                    width: that.width + 'px',
+                    top: that.startY + 'px',
+                    left: that.startX + 'px'
+                })
+            } else {
+                let clientHeight = document.documentElement.clientHeight
+                let clientWidth = document.documentElement.clientWidth
+                let clientX = e.clientX
+                let clientY = e.clientY
+                
+                if (clientX < 0) {
+                    clientX = 0
+                }
+
+                if (clientX > clientWidth) {
+                    clientX = clientWidth
+                }
+
+                if (clientY < 0) {
+                    clientY = 0
+                }
+
+                if (clientY > clientHeight) {
+                    clientY = clientHeight
+                }
+
+                that.width = Math.abs(clientX - that.startX)
+                that.height = Math.abs(clientY - that.startY)
+                that.startX = Math.min(that.startX, clientX)
+                that.startY = Math.min(that.startY, clientY)
+            }
             document.removeEventListener('mousemove', that.drawing)
     
             let canvas = document.createElement('canvas')
-            that.width = Math.abs(e.clientX - that.startX)
-            that.height = Math.abs(e.clientY - that.startY)
-            that.startX = Math.min(that.startX, e.clientX)
-            that.startY = Math.min(that.startY, e.clientY)
+        
             css(canvas, {
                 height: '100%',
                 width: '100%',
@@ -138,17 +199,39 @@ let kss = (function () {
                 let startY = event.clientY
                 document.addEventListener('mousemove', canvasMoveEvent)
                 document.addEventListener('mouseup', canvasUpEvent)
-    
+                //最后左上角的top和left
+                let top
+                let left
                 function canvasMoveEvent (e) {
-                    css(that.kssScreenShotWrapper, {
-                        top: that.startY + e.clientY - startY + 'px',
-                        left: that.startX + e.clientX - startX + 'px'
-                    })
+                    let clientHeight = document.documentElement.clientHeight
+                    let clientWidth = document.documentElement.clientWidth
+              
+                    top = that.startY + e.clientY - startY
 
-                    let currentStartX = that.startX + e.clientX - startX
-                    let currentStartY = that.startY + e.clientY - startY
+                    if (that.startY + e.clientY - startY + that.height > clientHeight) {
+                        top = clientHeight - that.height
+                    }
+
+                    if (that.startY + e.clientY - startY < 0) {
+                        top = 0
+                    }
+
+                    left = that.startX + e.clientX - startX
+
+                    if (that.startX + e.clientX - startX + that.width > clientWidth) {
+                        left = clientWidth - that.width
+                    }
+
+                    if (that.startX + e.clientX - startX < 0) {
+                        left = 0
+                    }
+
+                    css(that.kssScreenShotWrapper, {
+                        top: top + 'px',
+                        left: left + 'px'
+                    })
                    
-                    let exceed = that.toolbarWidth - that.width - currentStartX
+                    let exceed = that.toolbarWidth - that.width - left
            
                     if (exceed > 0) {
                         css(that.toolbar, {
@@ -160,9 +243,7 @@ let kss = (function () {
                         })
                     }
 
-                    let clientHeight = document.documentElement.clientHeight
-
-                    let bottomSurplus = clientHeight - currentStartY - that.height - that.toolbarMarginTop - that.toolbarHeight
+                    let bottomSurplus = clientHeight - top - that.height - that.toolbarMarginTop - that.toolbarHeight
 
                     if (bottomSurplus < 0) {
                         css(that.toolbar, {
@@ -176,8 +257,15 @@ let kss = (function () {
                 }
     
                 function canvasUpEvent (e) {
-                    that.startY = that.startY + e.clientY - startY
-                    that.startX = that.startX + e.clientX - startX
+                    if (top === undefined) {
+                        top = that.startY
+                    }
+
+                    if (left === undefined) {
+                        left = that.startX
+                    }
+                    that.startY = top
+                    that.startX = left
                     document.removeEventListener('mousemove', canvasMoveEvent)
                     document.removeEventListener('mouseup', canvasUpEvent)
                     drawMiddleImage(that)
@@ -210,7 +298,6 @@ let kss = (function () {
         }
 
         this.preventContextMenu = (e) => {
-            console.log(12312321)
             e.preventDefault()
         }
 

@@ -8,6 +8,7 @@ export default function complete (me) {
     let completeBT = document.createElement('span')
     completeBT.id = 'kssCompleteBT'
     completeBT.innerHTML = '完成'
+    completeBT.title = '完成截图'
 
     css(completeBT, {
         display: 'inline-block',

@@ -4,17 +4,27 @@ import makeSnapShoot from '../makeSnapShoot'
 export default function drawLineBT (me) {
     let drawLineBT = document.createElement('span')
     drawLineBT.id = 'kssDrawLineBT'
-    drawLineBT.innerHTML = '画线'
+    drawLineBT.title = '画刷工具'
 
     css(drawLineBT, {
         display: 'inline-block',
-        width: '40px',
+        width: '30px',
         height: '30px',
-        'line-height': '30px',
         'text-align': 'center',
         float: 'right',
         cursor: 'pointer'
     })
+
+    let drawLineImg = document.createElement('img')
+    drawLineImg.src = '../../assets/imgs/draw.png'
+    me.drawLineBT = drawLineBT
+    css(drawLineImg, {
+        width: '20px',
+        height: '20px',
+        'margin-top': '5px'
+    })
+
+    drawLineBT.appendChild(drawLineImg)
 
     drawLineBT.addEventListener('click', function () {
         me.isEdit = true
