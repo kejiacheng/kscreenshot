@@ -22,7 +22,8 @@ const webpackConfig = {
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(__dirname, 'demo')
+                    path.resolve(__dirname, 'demo'),
+                    path.resolve(__dirname, 'src')
                 ],
                 loader: 'babel-loader'
             }
@@ -34,7 +35,7 @@ const webpackConfig = {
                  template: path.join(demoPath, './index.html'),
                  filename: 'index.html',
                  inject: 'body',
-                 chunks: ['app', 'test']
+                 chunks: ['test']
              }
          ),
          new CopyWebpackPlugin(
