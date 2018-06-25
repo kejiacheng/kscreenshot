@@ -14,7 +14,7 @@ let kss = (function () {
 
     let instance
     //单例模式
-    let kss = function (key) {
+    let kss = function (key, getAbsolutePath) {
         if (instance) {
             return instance
         }
@@ -54,6 +54,9 @@ let kss = (function () {
         this.toolmousedown = null
         this.toolmousemove = null
         this.toolmouseup = null
+
+        //根据base64获取绝对地址
+        this.getAbsolutePath = getAbsolutePath
         
         this.startDrawDown = (e) => {
             const that = this

@@ -23,7 +23,7 @@ export default function complete (me) {
     completeBT.addEventListener('click', function () {
         me.isEdit = true
         
-        copy(me.snapshootList[me.snapshootList.length - 1])
+        copy(me, me.snapshootList[me.snapshootList.length - 1])
         download(me)
         endAndClear(me)
     })
