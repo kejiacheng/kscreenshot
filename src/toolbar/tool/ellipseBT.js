@@ -1,6 +1,7 @@
 import { css } from '../../util'
 import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
+import img from '../../assets/imgs/ellipse.png'
 
 export default function ellipseBT (me) {
     let ellipseBT = document.createElement('span')
@@ -17,7 +18,7 @@ export default function ellipseBT (me) {
     })
 
     let ellipseImg = document.createElement('img')
-    ellipseImg.src = '../../assets/imgs/ellipse.png'
+    ellipseImg.src = img
     me.ellipseBT = ellipseBT
     css(ellipseImg, {
         width: '20px',

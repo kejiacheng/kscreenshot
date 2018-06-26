@@ -1,5 +1,6 @@
 import { css } from '../../util'
-import backToPreImg from '../backToPreImg';
+import backToPreImg from '../backToPreImg'
+import img from '../../assets/imgs/back.png'
 
 export default function backBT (me) {
     let backBT = document.createElement('span')
@@ -17,7 +18,7 @@ export default function backBT (me) {
     })
 
     let backImg = document.createElement('img')
-    backImg.src = '../../assets/imgs/back.png'
+    backImg.src = img
     me.backBT = backBT
     css(backImg, {
         width: '20px',

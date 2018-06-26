@@ -1,5 +1,5 @@
 {
-  "name": "kss",
+  "name": "kscreenshot",
   "version": "1.0.0",
   "description": "",
   "main": "src/kss.js",
@@ -25,6 +25,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "copy-webpack-plugin": "^4.5.1",
     "html-webpack-plugin": "^3.2.0",
+    "url-loader": "^1.0.1",
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4"
   }

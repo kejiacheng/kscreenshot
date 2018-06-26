@@ -1,6 +1,7 @@
 import { css } from '../../util'
 import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
+import img from '../../assets/imgs/rect.png'
 
 export default function rectBT (me) {
     let rectBT = document.createElement('span')
@@ -17,7 +18,7 @@ export default function rectBT (me) {
     })
 
     let rectImg = document.createElement('img')
-    rectImg.src = '../../assets/imgs/rect.png'
+    rectImg.src = img
     me.rectBT = rectBT
     css(rectImg, {
         width: '20px',

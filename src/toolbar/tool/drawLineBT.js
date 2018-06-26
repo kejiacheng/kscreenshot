@@ -1,5 +1,6 @@
 import { css } from '../../util'
 import makeSnapShoot from '../makeSnapShoot'
+import img from '../../assets/imgs/draw.png'
 
 export default function drawLineBT (me) {
     let drawLineBT = document.createElement('span')
@@ -16,7 +17,7 @@ export default function drawLineBT (me) {
     })
 
     let drawLineImg = document.createElement('img')
-    drawLineImg.src = '../../assets/imgs/draw.png'
+    drawLineImg.src = img
     me.drawLineBT = drawLineBT
     css(drawLineImg, {
         width: '20px',

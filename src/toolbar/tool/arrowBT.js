@@ -2,6 +2,7 @@ import { css, remove } from '../../util'
 import arrow from '../arrow'
 import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
+import img from '../../assets/imgs/arrow.png'
 
 export default function arrowBT (me) {
     let arrowBT = document.createElement('span')
@@ -16,7 +17,7 @@ export default function arrowBT (me) {
         cursor: 'pointer'
     })
     let arrowImg = document.createElement('img')
-    arrowImg.src = '../../assets/imgs/arrow.png'
+    arrowImg.src = img
     me.arrowBT = arrowBT
     css(arrowImg, {
         width: '20px',

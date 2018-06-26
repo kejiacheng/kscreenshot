@@ -8,6 +8,7 @@ import clearMiddleImage from './toolbar/middleImage/clearMiddleImage'
 import endAndClear from './toolbar/endAndClear'
 import backRightClient from './backRightClient'
 import toolbarPosition from './toolbar/toolbarPosition'
+import cursorImg from './assets/imgs/cursor.ico'
 
 let kss = (function () {
     const me = this
@@ -81,7 +82,8 @@ let kss = (function () {
             css(kssScreenShotWrapper, {
                 position: 'fixed',
                 background: 'transparent',
-                'box-shadow': '0 0 0 9999px rgba(0, 0, 0, 0.3)'
+                'box-shadow': '0 0 0 9999px rgba(0, 0, 0, 0.3)',
+                'z-index': 10001
             })
             that.kssScreenShotWrapper = kssScreenShotWrapper
             let kssRectangle = document.createElement('div')
@@ -288,7 +290,7 @@ let kss = (function () {
             if (e.keyCode === key && e.shiftKey && !that.isScreenshot) {
                 that.isScreenshot = true
                 css(document.body, {
-                    cursor: 'url("./assets/imgs/cursor.ico"), auto',
+                    cursor: `url("${cursorImg}"), auto`,
                     'user-select': 'none'
                 })
         
@@ -306,7 +308,8 @@ let kss = (function () {
                 css(canvas, {
                     position: 'fixed',
                     top: 0,
-                    left: 0
+                    left: 0,
+                    'z-index': 10000
                 })
                 canvas.id = 'kss'
      
