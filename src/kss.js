@@ -1,6 +1,6 @@
 // import {a} from './toolbar.js'
 import html2canvas from './html2canvas.min.js'
-import { css, remove, domType } from './util'
+import { css, remove, domType, addClass } from './util'
 import createDragDom from './createDragDom.js'
 import createToolbar from './toolbar/toolbar.js'
 import drawMiddleImage from './toolbar/middleImage/drawMiddleImage'
@@ -21,6 +21,7 @@ let kss = (function () {
         }
 
         this.kss = null
+        this.style = null
         this.kssScreenShotWrapper = null
         this.rectangleCanvas = null
         this.toolbar = null
@@ -289,11 +290,12 @@ let kss = (function () {
         function isRightKey (key, e) {
             if (e.keyCode === key && e.shiftKey && !that.isScreenshot) {
                 that.isScreenshot = true
-                css(document.body, {
-                    cursor: `url("${cursorImg}"), auto`,
-                    'user-select': 'none'
-                })
-        
+                let style = document.createElement('style')
+                style.type = 'text/css'
+                style.innerHTML = `.kssBody{cursor: url("${cursorImg}"), auto; user-select: none}`
+                that.style = style
+                document.head.appendChild(style)
+                addClass(document.body, 'kssBody')
                 that.start()
                 that.end()
             }
