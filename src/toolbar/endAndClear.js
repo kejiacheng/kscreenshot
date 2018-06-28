@@ -2,10 +2,10 @@ import { css, remove, removeClass } from '../util'
 
 export default function endAndClear (me) {
     removeClass(document.body, 'kssBody')
-    document.head.removeChild(me.style)
-
+    console.log('jici')
     me.kss && remove(me.kss)
     me.kssScreenShotWrapper && remove(me.kssScreenShotWrapper)
+    me.style && remove(me.style)
     me.kss = null
     me.rectangleCanvas = null
     me.kssScreenShotWrapper = null

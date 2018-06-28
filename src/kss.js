@@ -290,12 +290,6 @@ let kss = (function () {
         function isRightKey (key, e) {
             if (e.keyCode === key && e.shiftKey && !that.isScreenshot) {
                 that.isScreenshot = true
-                let style = document.createElement('style')
-                style.type = 'text/css'
-                style.innerHTML = `.kssBody{cursor: url("${cursorImg}"), auto; user-select: none}`
-                that.style = style
-                document.head.appendChild(style)
-                addClass(document.body, 'kssBody')
                 that.start()
                 that.end()
             }
@@ -317,6 +311,14 @@ let kss = (function () {
      
                 document.body.appendChild(canvas)
 
+                let style = document.createElement('style')
+                style.type = 'text/css'
+                style.innerHTML = `.kssBody{cursor: url("${cursorImg}"), auto; user-select: none}`
+                that.style = style
+            
+                document.head.appendChild(style)
+                addClass(document.body, 'kssBody')
+
                 canvas.addEventListener('mousedown', that.startDrawDown)
             })
     }
@@ -328,6 +330,7 @@ let kss = (function () {
         function endScreenShot (e) {
             if (e.keyCode === 27) {
                 endAndClear(that)
+                document.removeEventListener('keydown', endScreenShot)
             }
         }
     }
