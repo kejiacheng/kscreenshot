@@ -14,7 +14,8 @@ const webpackConfig = {
         path: distPath,
         publicPath: './',
         library: 'kscreenshot',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        libraryExport: 'default'
     },
     devtool: 'inline-source-map',
     module: {
@@ -31,25 +32,7 @@ const webpackConfig = {
                 loader: 'url-loader'
             }
         ]
-    },
-    // plugins: [
-    //      new HtmlWebpackPlugin(
-    //          {
-    //              template: path.join(demoPath, './index.html'),
-    //              filename: 'index.html',
-    //              inject: 'body',
-    //              chunks: ['test']
-    //          }
-    //      ),
-    //      new CopyWebpackPlugin(
-    //         [
-    //           {
-    //             from: path.join(__dirname, './src/assets'),
-    //             to: path.join(__dirname, `./dist/assets`)
-    //           }
-    //         ]
-    //       )
-    // ]
+    }
 }
 
 module.exports = webpackConfig
