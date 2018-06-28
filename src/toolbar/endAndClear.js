@@ -2,7 +2,7 @@ import { css, remove, removeClass } from '../util'
 
 export default function endAndClear (me) {
     removeClass(document.body, 'kssBody')
-    console.log('jici')
+  
     me.kss && remove(me.kss)
     me.kssScreenShotWrapper && remove(me.kssScreenShotWrapper)
     me.style && remove(me.style)

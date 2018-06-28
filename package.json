@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/kss.js",
   "scripts": {
-    "start": "npm run check && cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --color --progress --hot --inline --open",
-    "babel": "babel src --out-dir dist1 --copy-files"
+    "start": "webpack"
   },
   "repository": {
     "type": "git",
