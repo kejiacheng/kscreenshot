@@ -1,18 +1,40 @@
-export default function arrow (startPos, endPos, me) {
+import { computed } from '../util'
+
+export default function arrow (startPos, endPos, triangle, me) {
     let startX = startPos.x
     let startY = startPos.y
     let endX = endPos.x
     let endY = endPos.y
+    let MaxTwoSize = 20
 
-    let twoSide = 20
-    let bottomSide = 16
-    let crossWidth = 12
+    computed(triangle, 'distance', ['twoSide', 'bottomSide', 'crossWidth'], [function (obj, baseValue, changeProperty) {
+        if ((baseValue / 2 * 1.1) <= MaxTwoSize) {
+            obj[changeProperty] = baseValue / 2 * 1.1
+        } else {
+            obj[changeProperty] = MaxTwoSize
+        }
+    }, function (obj, baseValue, changeProperty) {
+        if ((baseValue / 2 * 1.1) <= MaxTwoSize) {
+            obj[changeProperty] = baseValue / 2 * 1.1 * 0.8
+        } else {
+            obj[changeProperty] = MaxTwoSize * 0.8
+        }
+       
+    }, function (obj, baseValue, changeProperty) {
+        if ((baseValue / 2 * 1.1) <= MaxTwoSize) {
+            obj[changeProperty] = baseValue / 2 * 1.1 * 0.6
+        } else {
+            obj[changeProperty] = MaxTwoSize * 0.6
+        }
+    }])
+    let distance = Math.sqrt(Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2))
+ 
+    triangle.distance = distance
     
-    let h = Math.sqrt(Math.pow(twoSide, 2)  - Math.pow(bottomSide / 2, 2))
-    let x = Math.sqrt(Math.pow(h, 2) + Math.pow(crossWidth / 2, 2))
-
-    let angle = Math.atan(bottomSide / 2 / h) * 180 / Math.PI
-    let angle1 = Math.atan(crossWidth / 2 / h) * 180 / Math.PI
+    let h = Math.sqrt(Math.pow(triangle.twoSide, 2)  - Math.pow(triangle.bottomSide / 2, 2))
+    let x = Math.sqrt(Math.pow(h, 2) + Math.pow(triangle.crossWidth / 2, 2))
+    let angle = Math.atan(triangle.bottomSide / 2 / h) * 180 / Math.PI
+    let angle1 = Math.atan(triangle.crossWidth / 2 / h) * 180 / Math.PI
     let rightX, rightY, hX, hY, cX, cY, bX, bY
     //当左上和右下时为一种情况，左下和右上为一种情况
     if ((startX > endX && startY > endY) || (startX < endX && startY < endY)) {
@@ -30,8 +52,8 @@ export default function arrow (startPos, endPos, me) {
         rightX = endX + x1 * symbol
         rightY = endY + y1 * symbol
 
-        let y2 = Math.cos((angle + angle2) * 2 * Math.PI / 360) * twoSide
-        let x2 = Math.sin((angle + angle2) * 2 * Math.PI / 360) * twoSide
+        let y2 = Math.cos((angle + angle2) * 2 * Math.PI / 360) * triangle.twoSide
+        let x2 = Math.sin((angle + angle2) * 2 * Math.PI / 360) * triangle.twoSide
 
         hX = endX + x2 * symbol
         hY = endY + y2 * symbol
@@ -62,8 +84,8 @@ export default function arrow (startPos, endPos, me) {
         rightX = endX + x1 * symbol
         rightY = endY - y1 * symbol
         
-        let x2 = Math.cos((angle + angle2) * 2 * Math.PI / 360) * twoSide
-        let y2 = Math.sin((angle + angle2) * 2 * Math.PI / 360) * twoSide
+        let x2 = Math.cos((angle + angle2) * 2 * Math.PI / 360) * triangle.twoSide
+        let y2 = Math.sin((angle + angle2) * 2 * Math.PI / 360) * triangle.twoSide
    
         hX = endX + x2 * symbol
         hY = endY - y2 * symbol
@@ -89,16 +111,16 @@ export default function arrow (startPos, endPos, me) {
         let zX = endX
         let zY = endY + h * symbol
 
-        rightX = zX + crossWidth / 2 * symbol
+        rightX = zX + triangle.crossWidth / 2 * symbol
         rightY = zY
 
-        hX = zX + bottomSide / 2 * symbol
+        hX = zX + triangle.bottomSide / 2 * symbol
         hY = zY
 
-        bX = zX - crossWidth / 2 * symbol
+        bX = zX - triangle.crossWidth / 2 * symbol
         bY = zY
 
-        cX = zX - bottomSide / 2 * symbol
+        cX = zX - triangle.bottomSide / 2 * symbol
         cY = zY
     } else if (startY === endY) {
         let symbol = 1
@@ -111,18 +133,18 @@ export default function arrow (startPos, endPos, me) {
         let zY = endY
 
         rightX = zX
-        rightY = zY + crossWidth / 2 * symbol
+        rightY = zY + triangle.crossWidth / 2 * symbol
 
         hX = zX
-        hY = zY + bottomSide / 2 * symbol
+        hY = zY + triangle.bottomSide / 2 * symbol
 
         bX = zX
-        bY = zY - crossWidth / 2 * symbol
+        bY = zY - triangle.crossWidth / 2 * symbol
 
         cX = zX
-        cY = zY - bottomSide / 2 * symbol
+        cY = zY - triangle.bottomSide / 2 * symbol
     }
-
+ 
     let context = me.rectangleCanvas.getContext("2d")
     context.beginPath()
     context.lineWidth = 1

@@ -56,6 +56,12 @@ export default function arrowBT (me) {
             document.addEventListener('mouseup', arrowMouseupEvent)
             me.toolmousemove = arrowMousemoveEvent
             me.toolmouseup = arrowMouseupEvent
+            let triangle = {
+                    distance: null,
+                    twoSide: null,
+                    bottomSide: null,
+                    crossWidth: null
+                }
             function arrowMousemoveEvent (e) {
                 backToPreImg(me)
                 let endX = e.clientX
@@ -72,8 +78,8 @@ export default function arrowBT (me) {
                 } else if (endY > (me.startY + me.height)) {
                     endY = me.startY + me.height
                 }
-    
-                arrow({x: startX - me.startX, y: startY - me.startY}, {x: endX - me.startX, y: endY - me.startY}, me)
+
+                arrow({x: startX - me.startX, y: startY - me.startY}, {x: endX - me.startX, y: endY - me.startY}, triangle, me)
             }
 
             function arrowMouseupEvent (e) {

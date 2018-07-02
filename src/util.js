@@ -34,3 +34,13 @@ export function removeClass(obj, cls) {
 	    obj.className = obj.className.replace(reg, ' ');  
 	}
 }
+
+export function computed(obj, baseProperty, changeProperty, cb) {
+    Object.defineProperty(obj, baseProperty, {
+            set: function (val) {
+                changeProperty.forEach((it, index) => {
+                    cb[index](obj, val, changeProperty[index])
+                })
+            }
+        })
+}

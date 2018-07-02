@@ -11,8 +11,6 @@ import toolbarPosition from './toolbar/toolbarPosition'
 import cursorImg from './assets/imgs/cursor.ico'
 
 let kss = (function () {
-    const me = this
-
     let instance
     //单例模式
     let kss = function (key, getAbsolutePath) {
