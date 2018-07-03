@@ -45,10 +45,10 @@ let kss = (function () {
         this.dotSize = 6
         this.lineSize = 2
         //工具栏样式
-        this.toolbarWidth = 200
+        this.toolbarWidth = 230
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
-        this.toolbarColor = 'red'
+        this.toolbarColor = '#fb3838'
 
         //工具栏事件
         this.toolmousedown = null
