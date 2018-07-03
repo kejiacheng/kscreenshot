@@ -17,7 +17,7 @@ npm install kscreenshot --save
 
 ![](https://github.com/kejiacheng/img/blob/master/kscreenshot/toolbar.png)
 
-工具栏功能从左到右依次为：椭圆，矩形，线条，箭头，后退，完成。
+工具栏功能从左到右依次为：颜色，椭圆，矩形，线条，箭头，后退，完成。
 
 
 ### 使用
