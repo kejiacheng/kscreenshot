@@ -1,9 +1,11 @@
 kscreenshot
 ===========
 
-这是一个实用的web截图工具，带有下载，复制功能。
+这是一款实用的web截图工具。
 
-![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot.gif)
+![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot1.gif)
+![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot2.gif)
+![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot3.gif)
 
 npm:
 ```sh
