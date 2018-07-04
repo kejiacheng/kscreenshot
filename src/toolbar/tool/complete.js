@@ -13,7 +13,7 @@ export default function complete (me) {
 
     css(completeBT, {
         width: '40px',
-        'line-height': '30px'
+        'line-height': '28px'
     })
 
     completeBT.addEventListener('click', function () {

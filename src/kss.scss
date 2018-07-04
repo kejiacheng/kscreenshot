@@ -56,10 +56,13 @@ $baseColor: #488ff9;
             .kssToolbarItemBT{
                 display: inline-block;
                 width: 30px;
-                height: 30px;
+                height: 28px;
                 text-align: center;
                 float: right;
                 cursor: pointer;
+                &:hover{
+                    background: #dedede;
+                }
                 .kssToolbarItemImg{
                     width: 20px;
                     height: 20px;
