@@ -6,25 +6,13 @@ import img from '../../assets/imgs/rect.png'
 export default function rectBT (me) {
     let rectBT = document.createElement('span')
     rectBT.id = 'kssRectBT'
+    rectBT.className = 'kssToolbarItemBT'
     rectBT.title = '方形工具'
 
-    css(rectBT, {
-        display: 'inline-block',
-        width: '30px',
-        height: '30px',
-        'text-align': 'center',
-        float: 'right',
-        cursor: 'pointer'
-    })
-
     let rectImg = document.createElement('img')
+    rectImg.className = 'kssToolbarItemImg'
     rectImg.src = img
     me.rectBT = rectBT
-    css(rectImg, {
-        width: '20px',
-        height: '20px',
-        'margin-top': '5px'
-    })
 
     rectBT.appendChild(rectImg)
 

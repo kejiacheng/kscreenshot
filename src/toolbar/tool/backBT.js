@@ -5,26 +5,13 @@ import img from '../../assets/imgs/back.png'
 export default function backBT (me) {
     let backBT = document.createElement('span')
     backBT.id = 'kssbackeBT'
-    backBT.className = 'kssToolbarBT'
+    backBT.className = 'kssToolbarItemBT'
     backBT.title = '后退'
 
-    css(backBT, {
-        display: 'inline-block',
-        width: '30px',
-        height: '30px',
-        'text-align': 'center',
-        float: 'right',
-        cursor: 'pointer'
-    })
-
     let backImg = document.createElement('img')
+    backImg.className = 'kssToolbarItemImg'
     backImg.src = img
     me.backBT = backBT
-    css(backImg, {
-        width: '20px',
-        height: '20px',
-        'margin-top': '5px'
-    })
 
     backBT.appendChild(backImg)
 

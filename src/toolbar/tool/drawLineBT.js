@@ -5,25 +5,13 @@ import img from '../../assets/imgs/draw.png'
 export default function drawLineBT (me) {
     let drawLineBT = document.createElement('span')
     drawLineBT.id = 'kssDrawLineBT'
+    drawLineBT.className = 'kssToolbarItemBT'
     drawLineBT.title = '画刷工具'
 
-    css(drawLineBT, {
-        display: 'inline-block',
-        width: '30px',
-        height: '30px',
-        'text-align': 'center',
-        float: 'right',
-        cursor: 'pointer'
-    })
-
     let drawLineImg = document.createElement('img')
+    drawLineImg.className = 'kssToolbarItemImg'
     drawLineImg.src = img
     me.drawLineBT = drawLineBT
-    css(drawLineImg, {
-        width: '20px',
-        height: '20px',
-        'margin-top': '5px'
-    })
 
     drawLineBT.appendChild(drawLineImg)
 

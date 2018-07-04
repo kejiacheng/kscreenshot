@@ -16,16 +16,9 @@ export default function createToolbar (toolbarWidth, toolbarHeight, toolbarMargi
     toolbar.id = 'kssToolbar'
 
     css(toolbar, {
-        position: 'absolute',
-        right: 0,
         top: me.height + toolbarMarginTop + 'px',
         width: toolbarWidth + 'px',
-        height: toolbarHeight + 'px',
-        background: '#f1f1f1',
-        'font-size': '14px',
-        border: '1px solid #dedede',
-        'border-radius': '4px',
-        'box-sizing': 'border-box'
+        height: toolbarHeight + 'px'
     })
 
     toolbarPosition(me, me.width, me.height, me.startY, me.startX, toolbar)

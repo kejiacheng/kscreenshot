@@ -7,23 +7,13 @@ import img from '../../assets/imgs/arrow.png'
 export default function arrowBT (me) {
     let arrowBT = document.createElement('span')
     arrowBT.id = 'kssArrowBT'
+    arrowBT.className = 'kssToolbarItemBT'
     arrowBT.title = '箭头工具'
-    css(arrowBT, {
-        display: 'inline-block',
-        width: '30px',
-        height: '30px',
-        'text-align': 'center',
-        float: 'right',
-        cursor: 'pointer'
-    })
+  
     let arrowImg = document.createElement('img')
+    arrowImg.className = 'kssToolbarItemImg'
     arrowImg.src = img
     me.arrowBT = arrowBT
-    css(arrowImg, {
-        width: '20px',
-        height: '20px',
-        'margin-top': '5px'
-    })
 
     arrowBT.appendChild(arrowImg)
 

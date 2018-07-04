@@ -9,6 +9,7 @@ import endAndClear from './toolbar/endAndClear'
 import backRightClient from './backRightClient'
 import toolbarPosition from './toolbar/toolbarPosition'
 import cursorImg from './assets/imgs/cursor.ico'
+import './kss.scss'
 
 let kss = (function () {
     let instance
@@ -78,21 +79,10 @@ let kss = (function () {
             remove(document.getElementById('kssScreenShotWrapper'))
             let kssScreenShotWrapper = document.createElement('div')
             kssScreenShotWrapper.id = 'kssScreenShotWrapper'
-            css(kssScreenShotWrapper, {
-                position: 'fixed',
-                background: 'transparent',
-                'box-shadow': '0 0 0 9999px rgba(0, 0, 0, 0.3)',
-                'z-index': 10001
-            })
             that.kssScreenShotWrapper = kssScreenShotWrapper
             let kssRectangle = document.createElement('div')
-            css(kssRectangle, {
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%'
-            })
+            kssRectangle.id = 'kssRectangle'
+    
             kssScreenShotWrapper.appendChild(kssRectangle)
             document.body.appendChild(kssScreenShotWrapper)
           
@@ -149,16 +139,8 @@ let kss = (function () {
             document.removeEventListener('mousemove', that.drawing)
     
             let canvas = document.createElement('canvas')
-        
-            css(canvas, {
-                height: '100%',
-                width: '100%',
-                top: 0,
-                left: 0,
-                cursor: 'move',
-                position: 'absolute'
-            })
-            canvas.id = 'rectangleCanvas'
+            canvas.id = 'kssRectangleCanvas'
+
             that.kssScreenShotWrapper.appendChild(canvas)
             that.rectangleCanvas = canvas
             canvas.addEventListener('mousedown', function (event) {
@@ -227,19 +209,11 @@ let kss = (function () {
                 that.kssScreenShotWrapper,
                 that.dotSize,
                 that.lineSize,
-                '#488ff9',
                 that
             )
             let img = document.createElement('img')
-            css(img, {
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                display: 'none'
-
-            })
+            img.id = 'kssCurrentImgDom'
+   
             that.kssScreenShotWrapper.appendChild(img)
             that.currentImgDom = img
             drawMiddleImage(that)
@@ -299,22 +273,10 @@ let kss = (function () {
         html2canvas(document.body, {useCORS:true})
             .then((canvas) => {
                 that.kss = canvas
-                css(canvas, {
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    'z-index': 10000
-                })
                 canvas.id = 'kss'
      
                 document.body.appendChild(canvas)
 
-                let style = document.createElement('style')
-                style.type = 'text/css'
-                style.innerHTML = `.kssBody{cursor: url("${cursorImg}"), auto; user-select: none}`
-                that.style = style
-            
-                document.head.appendChild(style)
                 addClass(document.body, 'kssBody')
 
                 canvas.addEventListener('mousedown', that.startDrawDown)

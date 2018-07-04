@@ -7,17 +7,13 @@ import endAndClear from '../endAndClear'
 export default function complete (me) {
     let completeBT = document.createElement('span')
     completeBT.id = 'kssCompleteBT'
+    completeBT.className = 'kssToolbarItemBT'
     completeBT.innerHTML = '完成'
     completeBT.title = '完成截图'
 
     css(completeBT, {
-        display: 'inline-block',
         width: '40px',
-        height: '30px',
-        'line-height': '30px',
-        'text-align': 'center',
-        float: 'right',
-        cursor: 'pointer'
+        'line-height': '30px'
     })
 
     completeBT.addEventListener('click', function () {

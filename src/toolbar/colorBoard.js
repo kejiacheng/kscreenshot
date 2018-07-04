@@ -8,20 +8,6 @@ export default function colorBoard (me) {
     colorBoard.title = '颜色板'
     colorBoard.tabIndex = '-1'
 
-    css(colorBoard, {
-        position: 'absolute',
-        width: '180px',
-        height: '40px',
-        right: 0,
-        background: '#fff',
-        border: '1px solid #bbb',
-        'border-radius': '4px',
-        display: 'none',
-        outline: 'none',
-        transition: 'all 1s ease',
-        cursor: 'default'
-    })
-
     let currentColor = document.createElement('span')
     currentColor.id = 'kssCurrentColor'
 
@@ -40,31 +26,16 @@ export default function colorBoard (me) {
     let colorItemWrapper = document.createElement('div')
     colorItemWrapper.id = 'kssColorItemWrapper'
 
-    css(colorItemWrapper, {
-        display: 'inline-block',
-        'vertical-align': 'top',
-        width: '130px',
-        'margin-top': '5px',
-        'font-size': 0
-    })
-
     colorList.forEach(function (it, index) {
         let dom = document.createElement('span')
         dom.className = `kssColorItem kss${it}`
         dom.dataset.color = it
 
         css(dom, {
-            display: 'inline-block',
-            width: '14px',
-            height: '14px',
-            background: it,
-            'margin-right': '2px',
-            'box-sizing': 'border-box',
-            border: '1px solid #333',
-            cursor: 'pointer'
+            background: it
         })
 
-        if (index <= 7) {
+        if (index <= colorList.length / 2 - 1) {
             css(dom, {
                 'margin-bottom': '2px'
             })

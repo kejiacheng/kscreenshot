@@ -4,27 +4,15 @@ import img from '../../assets/imgs/color.png'
 export default function colorBT (me) {
     let colorBT = document.createElement('span')
     colorBT.id = 'kssColorBT'
+    colorBT.className = 'kssToolbarItemBT'
     colorBT.title = '颜色工具'
 
-    css(colorBT, {
-        display: 'inline-block',
-        width: '30px',
-        height: '30px',
-        'text-align': 'center',
-        float: 'right',
-        cursor: 'pointer'
-    })
-
-    let drawLineImg = document.createElement('img')
-    drawLineImg.src = img
+    let colorImg = document.createElement('img')
+    colorImg.className = 'kssToolbarItemImg'
+    colorImg.src = img
     me.colorBT = colorBT
-    css(drawLineImg, {
-        width: '20px',
-        height: '20px',
-        'margin-top': '5px'
-    })
 
-    colorBT.appendChild(drawLineImg)
+    colorBT.appendChild(colorImg)
 
     colorBT.addEventListener('click', function () {
         let clientHeight = document.documentElement.clientHeight
@@ -40,13 +28,9 @@ export default function colorBT (me) {
                 top: '-40px',
             })
         }
-        console.log(colorBoard.style.display)
-        if (colorBoard.style.display !== 'block') {
-            colorBoard.style.display = 'block'
-            colorBoard.focus()
-        } else {
-            colorBoard.blur()
-        }
+
+        colorBoard.style.display = 'block'
+        colorBoard.focus()
     })
 
     return colorBT

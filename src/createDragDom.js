@@ -4,7 +4,7 @@ import clearMiddleImage from './toolbar/middleImage/clearMiddleImage'
 import backRightClient from './backRightClient'
 import toolbarPosition from  './toolbar/toolbarPosition'
 
-export default function createDragDom (dom, dotSize, lineSize, bg, me) {
+export default function createDragDom (dom, dotSize, lineSize, me) {
     const lineList = [
         {name: 'n',style: {top: '-' + (lineSize / 2) + 'px', left: 0, width: '100%', height: (lineSize / 2) + 'px'}},
         {name: 's',style: {bottom: '-' + (lineSize / 2) + 'px', left: 0, width: '100%', height: (lineSize / 2) + 'px'}},
@@ -12,7 +12,7 @@ export default function createDragDom (dom, dotSize, lineSize, bg, me) {
         {name: 'e',style: {top: 0, right: '-' + (lineSize / 2) + 'px', width: (lineSize / 2) + 'px', height: '100%'}}
     ]
     lineList.forEach((it) => {
-        dom.appendChild(createLine(it.name, it.style, lineSize, bg))
+        dom.appendChild(createLine(it.name, it.style, lineSize))
     })
 
     const dotList = [
@@ -26,7 +26,7 @@ export default function createDragDom (dom, dotSize, lineSize, bg, me) {
         {name: 'sw',style: {bottom: '-' + (dotSize / 2 + 'px'), left: '-' + (dotSize / 2) + 'px'}},
     ]
     dotList.forEach((it) => {
-        dom.appendChild(createDot(it.name, it.style, dotSize, bg, it.id))
+        dom.appendChild(createDot(it.name, it.style, dotSize, it.id))
     })
     bindCornerEvent('swkssDot', dom, me)
     bindCornerEvent('sekssDot', dom, me)
@@ -43,15 +43,14 @@ export default function createDragDom (dom, dotSize, lineSize, bg, me) {
     bindSurroundEvent('vertical', 'skssLine', dom, me)
 }
 
-function createDot (type, style, size, bg) {
+function createDot (type, style, size) {
     let dom = document.createElement('div')
     dom.id = type + 'kssDot'
+    dom.className = 'kssDot'
     css(dom, {
-        position: 'absolute',
         width: size + 'px',
         height: size + 'px',
-        cursor: type + '-resize',
-        background: bg
+        cursor: type + '-resize'
     })
 
     css(dom, style)
@@ -59,12 +58,11 @@ function createDot (type, style, size, bg) {
     return dom
 }
 
-function createLine (type, style, size, bg) {
+function createLine (type, style, size) {
     let dom = document.createElement('div')
     dom.id = type + 'kssLine'
+    dom.className = 'kssLine'
     css(dom, {
-        position: 'absolute',
-        background: bg,
         cursor: type + '-resize'
     })
 

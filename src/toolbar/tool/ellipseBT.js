@@ -6,25 +6,13 @@ import img from '../../assets/imgs/ellipse.png'
 export default function ellipseBT (me) {
     let ellipseBT = document.createElement('span')
     ellipseBT.id = 'kssArrowBT'
+    ellipseBT.className = 'kssToolbarItemBT'
     ellipseBT.title = '椭圆工具'
 
-    css(ellipseBT, {
-        display: 'inline-block',
-        width: '30px',
-        height: '30px',
-        'text-align': 'center',
-        float: 'right',
-        cursor: 'pointer'
-    })
-
     let ellipseImg = document.createElement('img')
+    ellipseImg.className = 'kssToolbarItemImg'
     ellipseImg.src = img
     me.ellipseBT = ellipseBT
-    css(ellipseImg, {
-        width: '20px',
-        height: '20px',
-        'margin-top': '5px'
-    })
 
     ellipseBT.appendChild(ellipseImg)
 
