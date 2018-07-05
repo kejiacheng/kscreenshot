@@ -21,6 +21,14 @@ $baseColor: #488ff9;
         //     width: 100%;
         //     height: 100%;
         // }
+        #kssTextLayer{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 98;
+        }
         #kssRectangleCanvas{
             height: 100%;
             width: 100%;
@@ -28,10 +36,12 @@ $baseColor: #488ff9;
             left: 0;
             cursor: move;
             position: absolute;
+            z-index: 99;
         }
         .kssDot, .kssLine{
             position: absolute;
             background: $baseColor;
+            z-index: 100;
         }
         #kssCurrentImgDom{
             width: 100%;
@@ -80,6 +90,7 @@ $baseColor: #488ff9;
                     display: none;
                     outline: none;
                     cursor: default;
+                    z-index: 100;
                     #kssColorItemWrapper{
                         display: inline-block;
                         vertical-align: top;

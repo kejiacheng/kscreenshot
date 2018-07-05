@@ -46,7 +46,7 @@ let kss = (function () {
         this.dotSize = 6
         this.lineSize = 2
         //工具栏样式
-        this.toolbarWidth = 230
+        this.toolbarWidth = 260
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
         this.toolbarColor = '#fb3838'
@@ -84,6 +84,10 @@ let kss = (function () {
             // kssRectangle.id = 'kssRectangle'
     
             // kssScreenShotWrapper.appendChild(kssRectangle)
+            let kssTextLayer = document.createElement('div')
+            kssTextLayer.id = 'kssTextLayer'
+
+            kssScreenShotWrapper.appendChild(kssTextLayer)
             document.body.appendChild(kssScreenShotWrapper)
           
             document.addEventListener('mousemove', that.drawing)
