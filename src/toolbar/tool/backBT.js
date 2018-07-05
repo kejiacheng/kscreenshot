@@ -19,14 +19,11 @@ export default function backBT (me) {
     backBT.addEventListener('click', function () {
         if (me.snapshootList.length > 1) {
             if (me.snapshootList.length === 2) {
-                me.isEdit = false
-                me.currentToolType = null
-                me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)
-                document.removeEventListener('mousemove', me.toolmousemove)
-                document.removeEventListener('mouseup', me.toolmouseup)
-                activeToolbarItem(null)
+                backToInit()
             }
             me.snapshootList.pop()
+        } else if (me.snapshootList.length === 1) {
+            backToInit()
         }
       
         me.currentImgDom.src = me.snapshootList[me.snapshootList.length - 1]
@@ -34,6 +31,15 @@ export default function backBT (me) {
             backToPreImg(me)
         }, 0)
     })
+
+    function backToInit () {
+        me.isEdit = false
+        me.currentToolType = null
+        me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)
+        document.removeEventListener('mousemove', me.toolmousemove)
+        document.removeEventListener('mouseup', me.toolmouseup)
+        activeToolbarItem(null)
+    }
 
     return backBT
 } 
