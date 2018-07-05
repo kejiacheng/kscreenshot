@@ -80,10 +80,10 @@ let kss = (function () {
             let kssScreenShotWrapper = document.createElement('div')
             kssScreenShotWrapper.id = 'kssScreenShotWrapper'
             that.kssScreenShotWrapper = kssScreenShotWrapper
-            let kssRectangle = document.createElement('div')
-            kssRectangle.id = 'kssRectangle'
+            // let kssRectangle = document.createElement('div')
+            // kssRectangle.id = 'kssRectangle'
     
-            kssScreenShotWrapper.appendChild(kssRectangle)
+            // kssScreenShotWrapper.appendChild(kssRectangle)
             document.body.appendChild(kssScreenShotWrapper)
           
             document.addEventListener('mousemove', that.drawing)

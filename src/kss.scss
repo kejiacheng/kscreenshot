@@ -14,13 +14,13 @@ $baseColor: #488ff9;
         background: transparent;
         box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3);
         z-index: 10001;
-        #kssRectangle{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+        // #kssRectangle{
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     width: 100%;
+        //     height: 100%;
+        // }
         #kssRectangleCanvas{
             height: 100%;
             width: 100%;
@@ -29,11 +29,7 @@ $baseColor: #488ff9;
             cursor: move;
             position: absolute;
         }
-        .kssDot{
-            position: absolute;
-            background: $baseColor;
-        }
-        .kssLine{
+        .kssDot, .kssLine{
             position: absolute;
             background: $baseColor;
         }
@@ -68,6 +64,9 @@ $baseColor: #488ff9;
                     height: 20px;
                     margin-top: 5px;
                 }
+            }
+            .kssToolbarActiveItemBT{
+                background: #dedede;
             }
             #kssToolbarMiddleArea{
                 #kssColorBoard{

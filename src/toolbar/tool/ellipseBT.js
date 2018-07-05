@@ -2,6 +2,7 @@ import { css } from '../../util'
 import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
 import img from '../../assets/imgs/ellipse.png'
+import activeToolbarItem from '../activeToolbarItem'
 
 export default function ellipseBT (me) {
     let ellipseBT = document.createElement('span')
@@ -24,6 +25,7 @@ export default function ellipseBT (me) {
         }
 
         me.currentToolType = 'ellipse'
+        activeToolbarItem(ellipseBT)
 
         if (me.toolmousedown) {
             me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)

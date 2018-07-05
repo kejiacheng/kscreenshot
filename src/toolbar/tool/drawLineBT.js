@@ -1,6 +1,7 @@
 import { css } from '../../util'
 import makeSnapShoot from '../makeSnapShoot'
 import img from '../../assets/imgs/draw.png'
+import activeToolbarItem from '../activeToolbarItem'
 
 export default function drawLineBT (me) {
     let drawLineBT = document.createElement('span')
@@ -23,6 +24,7 @@ export default function drawLineBT (me) {
         }
      
         me.currentToolType = 'drawLine'
+        activeToolbarItem(drawLineBT)
        
        if (me.toolmousedown) {
             me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)

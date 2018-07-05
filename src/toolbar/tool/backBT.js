@@ -1,6 +1,7 @@
 import { css } from '../../util'
 import backToPreImg from '../backToPreImg'
 import img from '../../assets/imgs/back.png'
+import activeToolbarItem from '../activeToolbarItem'
 
 export default function backBT (me) {
     let backBT = document.createElement('span')
@@ -23,6 +24,7 @@ export default function backBT (me) {
                 me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)
                 document.removeEventListener('mousemove', me.toolmousemove)
                 document.removeEventListener('mouseup', me.toolmouseup)
+                activeToolbarItem(null)
             }
             me.snapshootList.pop()
         }

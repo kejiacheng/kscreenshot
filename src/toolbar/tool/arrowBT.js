@@ -3,6 +3,7 @@ import arrow from '../arrow'
 import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
 import img from '../../assets/imgs/arrow.png'
+import activeToolbarItem from '../activeToolbarItem'
 
 export default function arrowBT (me) {
     let arrowBT = document.createElement('span')
@@ -25,6 +26,7 @@ export default function arrowBT (me) {
         }
     
         me.currentToolType = 'arrow'
+        activeToolbarItem(arrowBT)
      
         if (me.toolmousedown) {
             me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)
