@@ -3,6 +3,7 @@ import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
 import img from '../../assets/imgs/rect.png'
 import activeToolbarItem from '../activeToolbarItem'
+import layerSort from '../layerSort'
 
 export default function rectBT (me) {
     let rectBT = document.createElement('span')
@@ -26,6 +27,7 @@ export default function rectBT (me) {
      
         me.currentToolType = 'rect'
         activeToolbarItem(rectBT)
+        layerSort(me, 'canvasLayer')
 
         if (me.toolmousedown) {
             me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)

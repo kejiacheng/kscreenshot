@@ -22,6 +22,7 @@ let kss = (function () {
         this.kss = null
         this.style = null
         this.kssScreenShotWrapper = null
+        this.kssTextLayer = null
         this.rectangleCanvas = null
         this.toolbar = null
         //存储当前快照的元素
@@ -86,6 +87,7 @@ let kss = (function () {
             // kssScreenShotWrapper.appendChild(kssRectangle)
             let kssTextLayer = document.createElement('div')
             kssTextLayer.id = 'kssTextLayer'
+            that.kssTextLayer = kssTextLayer
 
             kssScreenShotWrapper.appendChild(kssTextLayer)
             document.body.appendChild(kssScreenShotWrapper)
@@ -242,6 +244,7 @@ let kss = (function () {
                 }
                 remove(that.kssScreenShotWrapper)
                 that.kssScreenShotWrapper = null
+                that.kssTextLayer = null
                 that.rectangleCanvas = null
                 that.drawingStatus = null
                 that.isEdit = false
