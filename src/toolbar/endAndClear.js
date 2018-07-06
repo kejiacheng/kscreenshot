@@ -8,6 +8,7 @@ export default function endAndClear (me) {
     me.style && remove(me.style)
     me.kss = null
     me.rectangleCanvas = null
+    me.kssTextLayer = null
     me.kssScreenShotWrapper = null
     me.drawingStatus = null
     me.toolbar = null

@@ -22,6 +22,7 @@ let kss = (function () {
         this.kss = null
         this.style = null
         this.kssScreenShotWrapper = null
+        this.kssTextLayer = null
         this.rectangleCanvas = null
         this.toolbar = null
         //存储当前快照的元素
@@ -46,7 +47,7 @@ let kss = (function () {
         this.dotSize = 6
         this.lineSize = 2
         //工具栏样式
-        this.toolbarWidth = 230
+        this.toolbarWidth = 260
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
         this.toolbarColor = '#fb3838'
@@ -84,6 +85,11 @@ let kss = (function () {
             // kssRectangle.id = 'kssRectangle'
     
             // kssScreenShotWrapper.appendChild(kssRectangle)
+            let kssTextLayer = document.createElement('div')
+            kssTextLayer.id = 'kssTextLayer'
+            that.kssTextLayer = kssTextLayer
+
+            kssScreenShotWrapper.appendChild(kssTextLayer)
             document.body.appendChild(kssScreenShotWrapper)
           
             document.addEventListener('mousemove', that.drawing)
@@ -238,6 +244,7 @@ let kss = (function () {
                 }
                 remove(that.kssScreenShotWrapper)
                 that.kssScreenShotWrapper = null
+                that.kssTextLayer = null
                 that.rectangleCanvas = null
                 that.drawingStatus = null
                 that.isEdit = false

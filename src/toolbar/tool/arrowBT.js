@@ -4,6 +4,7 @@ import backToPreImg from '../backToPreImg'
 import makeSnapShoot from '../makeSnapShoot'
 import img from '../../assets/imgs/arrow.png'
 import activeToolbarItem from '../activeToolbarItem'
+import layerSort from '../layerSort'
 
 export default function arrowBT (me) {
     let arrowBT = document.createElement('span')
@@ -27,6 +28,7 @@ export default function arrowBT (me) {
     
         me.currentToolType = 'arrow'
         activeToolbarItem(arrowBT)
+        layerSort(me, 'canvasLayer')
      
         if (me.toolmousedown) {
             me.rectangleCanvas.removeEventListener('mousedown', me.toolmousedown)

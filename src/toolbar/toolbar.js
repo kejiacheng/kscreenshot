@@ -7,6 +7,7 @@ import drawLineBT from './tool/drawLineBT'
 import rectBT from './tool/rectBT'
 import ellipseBT from './tool/ellipseBT'
 import colorBT from './tool/colorBT'
+import textBT from './tool/textBT'
 
 import toolbarMiddleArea from './toolbarMiddleArea'
 import toolbarPosition from './toolbarPosition'
@@ -30,6 +31,7 @@ export default function createToolbar (toolbarWidth, toolbarHeight, toolbarMargi
     toolbar.appendChild(rectBT(me))
     toolbar.appendChild(ellipseBT(me))
     toolbar.appendChild(colorBT(me))
+    toolbar.appendChild(textBT(me))
     
     toolbar.appendChild(toolbarMiddleArea(me))
 
