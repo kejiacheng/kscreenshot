@@ -51,6 +51,7 @@ let kss = (function () {
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
         this.toolbarColor = '#fb3838'
+        this.toolbarLineWidth = 10
 
         //工具栏事件
         this.toolmousedown = null
@@ -81,10 +82,6 @@ let kss = (function () {
             let kssScreenShotWrapper = document.createElement('div')
             kssScreenShotWrapper.id = 'kssScreenShotWrapper'
             that.kssScreenShotWrapper = kssScreenShotWrapper
-            // let kssRectangle = document.createElement('div')
-            // kssRectangle.id = 'kssRectangle'
-    
-            // kssScreenShotWrapper.appendChild(kssRectangle)
             let kssTextLayer = document.createElement('div')
             kssTextLayer.id = 'kssTextLayer'
             that.kssTextLayer = kssTextLayer

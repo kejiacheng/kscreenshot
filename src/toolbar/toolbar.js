@@ -30,8 +30,8 @@ export default function createToolbar (toolbarWidth, toolbarHeight, toolbarMargi
     toolbar.appendChild(drawLineBT(me))
     toolbar.appendChild(rectBT(me))
     toolbar.appendChild(ellipseBT(me))
-    toolbar.appendChild(colorBT(me))
     toolbar.appendChild(textBT(me))
+    toolbar.appendChild(colorBT(me))
     
     toolbar.appendChild(toolbarMiddleArea(me))
 

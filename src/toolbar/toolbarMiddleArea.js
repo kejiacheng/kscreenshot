@@ -1,5 +1,6 @@
 import { css } from '../util'
 import colorBoard from './colorBoard'
+import setLineWidth from './setLineWidth'
 
 export default function toolbarMiddleArea (me) {
     let clientHeight = document.documentElement.clientHeight
@@ -7,6 +8,7 @@ export default function toolbarMiddleArea (me) {
     toolbarMiddleArea.id = 'kssToolbarMiddleArea'
 
     toolbarMiddleArea.appendChild(colorBoard(me))
+    toolbarMiddleArea.appendChild(setLineWidth(me))
 
     return toolbarMiddleArea
 }

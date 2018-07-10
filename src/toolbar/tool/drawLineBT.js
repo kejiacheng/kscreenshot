@@ -20,6 +20,23 @@ export default function drawLineBT (me) {
     drawLineBT.addEventListener('click', function () {
         me.isEdit = true
         
+        let kssSetLineWidth = document.getElementById('kssSetLineWidth')
+        let clientHeight = document.documentElement.clientHeight
+        let bottomSurplus = clientHeight - me.startY - me.height - me.toolbarMarginTop - me.toolbarHeight
+        
+        if (bottomSurplus < 0) {
+            css(kssSetLineWidth, {
+                top: '30px',
+            })
+        } else {
+            css(kssSetLineWidth, {
+                top: '-40px',
+            })
+        }
+
+        kssSetLineWidth.style.display = 'block'
+        kssSetLineWidth.focus()
+
         if (me.currentToolType === 'drawLine') {
             return
         }
@@ -44,7 +61,7 @@ export default function drawLineBT (me) {
             let context = me.rectangleCanvas.getContext("2d")
             context.beginPath()
             context.moveTo(e.clientX - me.startX, e.clientY - me.startY)
-            context.lineWidth = 10
+            
             context.strokeStyle = me.toolbarColor
      
             document.addEventListener('mousemove', drawLineMousemoveEvent)
@@ -53,6 +70,8 @@ export default function drawLineBT (me) {
             me.toolmouseup = drawLineMouseupEvent
 
             function drawLineMousemoveEvent (e) {
+                console.log(me.toolbarLineWidth)
+                context.lineWidth = me.toolbarLineWidth
                 context.lineTo(e.clientX - me.startX, e.clientY - me.startY)
                 context.stroke()  
             }

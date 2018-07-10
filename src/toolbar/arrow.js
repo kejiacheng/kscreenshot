@@ -22,9 +22,9 @@ export default function arrow (startPos, endPos, triangle, me) {
        
     }, function (obj, baseValue, changeProperty) {
         if ((baseValue / 2 * 1.1) <= MaxTwoSize) {
-            obj[changeProperty] = baseValue / 2 * 1.1 * 0.6
+            obj[changeProperty] = baseValue / 2 * 1.1 * 0.4
         } else {
-            obj[changeProperty] = MaxTwoSize * 0.6
+            obj[changeProperty] = MaxTwoSize * 0.4
         }
     }])
     let distance = Math.sqrt(Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2))

@@ -12,13 +12,7 @@ export default function colorBoard (me) {
     currentColor.id = 'kssCurrentColor'
 
     css(currentColor, {
-        display: 'inline-block',
-        width: '30px',
-        height: '30px',
-        background: me.toolbarColor,
-        'margin': '5px 8px 0 8px',
-        'box-sizing': 'border-box',
-        border: '1px solid #333'
+        background: me.toolbarColor
     })
 
     colorBoard.appendChild(currentColor)
@@ -43,7 +37,7 @@ export default function colorBoard (me) {
 
         dom.addEventListener('click', function (e) {
             let color = e.currentTarget.dataset.color
-            console.log(e.currentTarget.dataset.color)
+            
             me.toolbarColor = color
             currentColor.style.background = color
         })
