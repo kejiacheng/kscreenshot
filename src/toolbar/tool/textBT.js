@@ -91,6 +91,7 @@ export default function textBT (me) {
                 textarea.addEventListener('blur', function (e) {
                     isFocus = false
                     if (textarea.innerHTML === '') {
+                        remove(textarea)
                         return
                     }
                     var context = me.rectangleCanvas.getContext('2d')
