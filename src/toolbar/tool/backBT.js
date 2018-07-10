@@ -2,6 +2,7 @@ import { css } from '../../util'
 import backToPreImg from '../backToPreImg'
 import img from '../../assets/imgs/back.png'
 import activeToolbarItem from '../activeToolbarItem'
+import layerSort from '../layerSort'
 
 export default function backBT (me) {
     let backBT = document.createElement('span')
@@ -19,10 +20,12 @@ export default function backBT (me) {
     backBT.addEventListener('click', function () {
         if (me.snapshootList.length > 1) {
             if (me.snapshootList.length === 2) {
+                layerSort(me, 'canvasLayer')
                 backToInit()
             }
             me.snapshootList.pop()
         } else if (me.snapshootList.length === 1) {
+            layerSort(me, 'canvasLayer')
             backToInit()
         }
       
