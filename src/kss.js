@@ -14,7 +14,7 @@ import './kss.scss'
 let kss = (function () {
     let instance
     //单例模式
-    let kss = function (key, getAbsolutePath) {
+    let kss = function (options) {
         if (instance) {
             return instance
         }
@@ -46,8 +46,10 @@ let kss = (function () {
         this.height = null
         this.dotSize = 6
         this.lineSize = 2
+        //工具显示状态
+        this.toolShow = options.toolShow
         //工具栏样式
-        this.toolbarWidth = 260
+        this.toolbarWidth = null
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
         this.toolbarColor = '#fb3838'
@@ -59,7 +61,12 @@ let kss = (function () {
         this.toolmouseup = null
 
         //根据base64获取绝对地址
-        this.getAbsolutePath = getAbsolutePath
+        this.copyPath = options.copyPath
+        //是否下载
+        this.needDownload = options.needDownload
+
+        //回调
+        this.endCB = options.endCB
         
         this.startDrawDown = (e) => {
             const that = this
@@ -220,7 +227,7 @@ let kss = (function () {
             that.kssScreenShotWrapper.appendChild(img)
             that.currentImgDom = img
             drawMiddleImage(that)
-            that.toolbar = createToolbar(that.toolbarWidth, that.toolbarHeight, that.toolbarMarginTop, that)
+            that.toolbar = createToolbar(that)
         }
 
         this.preventContextMenu = (e) => {
@@ -254,13 +261,25 @@ let kss = (function () {
             }
         }
 
-        this.init(key)
+        this.init(options.key, options.immediately)
         return instance = this
     }
 
-    kss.prototype.init = function (key) {
+    kss.prototype.init = function (key, immediately) {
         const that = this
    
+        if (immediately === true) {
+            that.isScreenshot = true
+            that.start()
+            that.end()
+        }
+
+        if (key === undefined) {
+            key = 65
+        } else if (key === null) {
+            return
+        }
+
         document.addEventListener('keydown', isRightKey.bind(null, key))
 
         function isRightKey (key, e) {
@@ -269,7 +288,7 @@ let kss = (function () {
                 that.start()
                 that.end()
             }
-        }
+        }     
     }
 
     kss.prototype.start = function () {
@@ -278,7 +297,7 @@ let kss = (function () {
             .then((canvas) => {
                 that.kss = canvas
                 canvas.id = 'kss'
-     
+                    
                 document.body.appendChild(canvas)
 
                 addClass(document.body, 'kssBody')

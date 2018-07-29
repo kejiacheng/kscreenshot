@@ -1,4 +1,4 @@
-import {css, remove} from '../util'
+import {css, remove, typeChecking} from '../util'
 
 export default function copy (me, url) {
     let imgWrapper = document.createElement('span')
@@ -7,7 +7,20 @@ export default function copy (me, url) {
     })
 
     let img = document.createElement('img')
-    img.src = me.getAbsolutePath(url)
+
+    let absolutePath
+    if (typeChecking(me.copyPath) === '[object Function]') {
+        absolutePath = me.copyPath(url)
+    } else {
+        absolutePath = null
+    }
+    
+    if (absolutePath === null) {
+        return 
+    } else {
+        img.src = absolutePath
+    }
+
     imgWrapper.appendChild(img)
     document.body.appendChild(imgWrapper)
 

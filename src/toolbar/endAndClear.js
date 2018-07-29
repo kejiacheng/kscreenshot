@@ -1,4 +1,4 @@
-import { remove, removeClass } from '../util'
+import { remove, removeClass, typeChecking } from '../util'
 
 export default function endAndClear (me) {
     removeClass(document.body, 'kssBody')
@@ -25,4 +25,5 @@ export default function endAndClear (me) {
     }, 0)
     
     document.removeEventListener('mouseup', me.cancelDrawingStatus)
+    typeChecking(me.endCB === '[object Function]') && me.endCB()
 }

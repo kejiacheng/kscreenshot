@@ -44,3 +44,7 @@ export function computed(obj, baseProperty, changeProperty, cb) {
             }
         })
 }
+
+export function typeChecking (val) {
+    return Object.prototype.toString.call(val)
+}

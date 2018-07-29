@@ -70,7 +70,6 @@ export default function drawLineBT (me) {
             me.toolmouseup = drawLineMouseupEvent
 
             function drawLineMousemoveEvent (e) {
-                console.log(me.toolbarLineWidth)
                 context.lineWidth = me.toolbarLineWidth
                 context.lineTo(e.clientX - me.startX, e.clientY - me.startY)
                 context.stroke()  

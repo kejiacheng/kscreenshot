@@ -4,7 +4,7 @@ import copy from '../copy'
 import download from '../download'
 import endAndClear from '../endAndClear'
 
-export default function complete (me) {
+export default function completeBT (me) {
     let completeBT = document.createElement('span')
     completeBT.id = 'kssCompleteBT'
     completeBT.className = 'kssToolbarItemBT'
@@ -16,11 +16,11 @@ export default function complete (me) {
         'line-height': '28px'
     })
 
-    completeBT.addEventListener('click', function () {
+    completeBT.addEventListener('click', async function () {
         me.isEdit = true
         
         copy(me, me.snapshootList[me.snapshootList.length - 1])
-        download(me)
+        me.needDownload === true && (await download(me))
         endAndClear(me)
     })
 

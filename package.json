@@ -1,8 +1,8 @@
 {
   "name": "kscreenshot",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "",
-  "main": "src/kss.js",
+  "main": "dist/kss.js",
   "scripts": {
     "start": "webpack"
   },
