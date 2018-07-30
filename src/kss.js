@@ -260,6 +260,12 @@ let kss = (function () {
                 that.kss.addEventListener('mousedown', that.startDrawDown)
             }
         }
+        this.startScreenShot = () => {
+            this.start()
+        }
+        this.endScreenShot = () => {
+            endAndClear(this)
+        }
 
         this.init(options.key, options.immediately)
         return instance = this

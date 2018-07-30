@@ -25,10 +25,140 @@ npm install kscreenshot --save
 import kscreenshot from 'kscreenshot'
 
 //65指键盘中的A
-new kscreenshot(65, function (base64) {
-    return 'https://www.baidu.com/img/bd_logo1.png'
-})
+new kscreenshot(
+    {
+        key: 65 
+    }
+)
 ```
-该截图工具带有两个参数：1.触发按键；2.截图完成后复制功能
+当按下shift + A将会触发截图功能
 
-当执行完程序后，按下shift + A将会触发截图功能；当点击完成，将会触发第二个回调函数，该函数带有截图的base64码，用户需返回一个绝对路径用以完成复制功能。
+#### 参数
+<table>
+  <tr>
+    <th>参数</th>
+    <th>说明</th>
+    <th>类型</th>
+    <th>默认值</th>
+  </tr>
+  <tr>
+    <td>key</td>
+    <td>截图触发按键（例：65时则同时按下shit + A则触发截图）</td>
+    <td>number</td>
+    <td>65</td>
+  </tr>
+  <tr>
+    <td>toolshow</td>
+    <td>工具栏各个工具显示(具体见下面toolshow配置)</td>
+    <td>object</td>
+    <td>默认每个工具都显示</td>
+  </tr>  
+  <tr>
+    <td>copyPath</td>
+    <td>参数为base64格式的图片（该功能最好是结合nw electron等工具使用。js目前暂未找到能兼容各客户端的方法，因此最好return null）</td>
+    <td>Function</td>
+    <td>noob</td>
+  </tr>  
+  <tr>
+    <td>needDownload</td>
+    <td>是否下载截图后的图片</td>
+    <td>bool</td>
+    <td>false</td>
+  </tr> 
+  <tr>
+    <td>endCB</td>
+    <td>结束截图后的回调函数</td>
+    <td>Function</td>
+    <td>noob</td>
+  </tr> 
+  <tr>
+    <td>immediately</td>
+    <td>是否立即开启截图</td>
+    <td>bool</td>
+    <td>false</td>
+  </tr> 
+</table>
+
+#### toolshow配置
+<table>
+  <tr>
+    <th>参数</th>
+    <th>说明</th>
+    <th>类型</th>
+    <th>默认值</th>
+  </tr>
+  <tr>
+    <th>complete</th>
+    <th>控制确认按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>quit</th>
+    <th>控制退出按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>back</th>
+    <th>控制后退按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>arrow</th>
+    <th>控制箭头按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>drawLine</th>
+    <th>控制线条按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>rect</th>
+    <th>控制矩形按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>ellipse</th>
+    <th>控制椭圆按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>text</th>
+    <th>控制文字按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+  <tr>
+    <th>color</th>
+    <th>控制颜色版按键显示）</th>
+    <th>bool</th>
+    <th>true</th>
+  </tr>  
+</table>
+
+#### 方法
+<table>
+  <tr>
+    <td>
+      startScreenShot()
+    </td>
+    <td>
+      开启截图
+    </td>
+  </tr>
+  <tr>
+    <td>
+      endScreenShot()
+    </td>
+    <td>
+      结束截图
+    </td>
+  </tr>
+</table>
