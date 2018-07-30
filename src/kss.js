@@ -275,7 +275,6 @@ let kss = (function () {
         const that = this
    
         if (immediately === true) {
-            that.isScreenshot = true
             that.start()
             that.end()
         }
@@ -290,7 +289,6 @@ let kss = (function () {
 
         function isRightKey (key, e) {
             if (e.keyCode === key && e.shiftKey && !that.isScreenshot) {
-                that.isScreenshot = true
                 that.start()
                 that.end()
             }
@@ -299,6 +297,10 @@ let kss = (function () {
 
     kss.prototype.start = function () {
         const that = this
+        if (that.isScreenshot) {
+            return
+        }
+        that.isScreenshot = true
         html2canvas(document.body, {useCORS:true})
             .then((canvas) => {
                 that.kss = canvas
