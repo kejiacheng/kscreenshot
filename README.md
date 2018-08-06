@@ -89,55 +89,55 @@ new kscreenshot(
   </tr>
   <tr>
     <th>complete</th>
-    <th>控制确认按键显示）</th>
+    <th>控制确认按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>quit</th>
-    <th>控制退出按键显示）</th>
+    <th>控制退出按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>back</th>
-    <th>控制后退按键显示）</th>
+    <th>控制后退按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>arrow</th>
-    <th>控制箭头按键显示）</th>
+    <th>控制箭头按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>drawLine</th>
-    <th>控制线条按键显示）</th>
+    <th>控制线条按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>rect</th>
-    <th>控制矩形按键显示）</th>
+    <th>控制矩形按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>ellipse</th>
-    <th>控制椭圆按键显示）</th>
+    <th>控制椭圆按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>text</th>
-    <th>控制文字按键显示）</th>
+    <th>控制文字按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
   <tr>
     <th>color</th>
-    <th>控制颜色版按键显示）</th>
+    <th>控制颜色版按键显示</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
@@ -162,3 +162,10 @@ new kscreenshot(
     </td>
   </tr>
 </table>
+
+
+### 结合electron、NW等前端桌面开发库可实现整个显示屏截图
+
+#### 实现demo图
+
+![](https://github.com/kejiacheng/img/blob/master/kscreenshot/AllDisplay.gif)
