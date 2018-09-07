@@ -55,7 +55,7 @@ new kscreenshot(
   </tr>  
   <tr>
     <td>copyPath</td>
-    <td>参数为base64格式的图片（该功能最好是结合nw electron等工具使用。js目前暂未找到能兼容各客户端的方法，因此最好return null）</td>
+    <td>参数为base64格式的图片（该功能不建议使用，最好是结合nw electron等工具实现复制功能。js目前暂未找到能兼容各客户端的方法，因此最好return null）</td>
     <td>Function</td>
     <td>noob</td>
   </tr>  
