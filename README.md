@@ -1,7 +1,7 @@
 kscreenshot
 ===========
 
-这是一款实用的web前端截图工具.
+这是一款实用的web前端截图工具
 
 ![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot1.gif)
 ![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot2.gif)
