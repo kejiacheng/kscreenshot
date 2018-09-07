@@ -31,5 +31,8 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
   }
 }
