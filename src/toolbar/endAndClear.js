@@ -25,5 +25,6 @@ export default function endAndClear (me) {
     }, 0)
     
     document.removeEventListener('mouseup', me.cancelDrawingStatus)
-    typeChecking(me.endCB === '[object Function]') && me.endCB()
+
+    typeChecking(me.endCB) === '[object Function]' && me.endCB()
 }
