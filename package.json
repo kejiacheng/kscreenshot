@@ -1,6 +1,6 @@
 {
   "name": "kscreenshot",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "",
   "main": "dist/kss.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "webpack-cli": "^2.1.4"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "rxjs": "^6.3.2"
   }
 }
