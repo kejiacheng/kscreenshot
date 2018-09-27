@@ -1,10 +1,10 @@
 {
   "name": "kscreenshot",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "dist/kss.js",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,11 @@
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.9.1",
-    "webpack-cli": "^2.1.4"
+    "webpack-cli": "^3.1.1"
   },
   "dependencies": {
     "express": "^4.16.3",
+    "html2canvas": "^1.0.0-alpha.12",
     "rxjs": "^6.3.2"
   }
 }
