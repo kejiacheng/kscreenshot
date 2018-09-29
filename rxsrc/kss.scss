@@ -1,0 +1,12 @@
+$baseColor: #488ff9;
+
+.kssBody {
+  cursor: url("./imgs/cursor.ico"), auto;
+  user-select: none;
+  #kss {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100000000;
+  }
+}

@@ -23,7 +23,7 @@ const webpackConfig = {
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(__dirname, 'src')
+                    path.resolve(__dirname, srcPath)
                 ],
                 loader: 'babel-loader'
             },
