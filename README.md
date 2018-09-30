@@ -169,3 +169,5 @@ new kscreenshot(
 #### 实现demo图
 
 ![](https://github.com/kejiacheng/img/blob/master/kscreenshot/AllDisplay.gif)
+
+测试
