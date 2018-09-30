@@ -169,33 +169,3 @@ new kscreenshot(
 #### 实现demo图
 
 ![](https://github.com/kejiacheng/img/blob/master/kscreenshot/AllDisplay.gif)
-
-## code
-### html
-```
-<div class="wrap">
-  <p class="item">1</p>
-  <p class="item">2</p>
-  <p class="item">3</p>
-  <p class="item">4</p>
-  <p class="item">5</p>
-  <p class="item">6</p>
-</div>
-```
-### js
-```
-let dom = document.getElementsByClassName('item')
-
-from(dom)
-      .subscribe(x => x.parentNode.removeChild(x))
-```
-
-page will remove 1, 3, 5,  remain 2, 4, 5
-
-## reason
-
-dom will change in real time when getting HTMLCollection by document.getElementsByClassName
-
-## solution
-
-1.
