@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 
-const srcPath = path.join(__dirname, './src')
+const srcPath = path.join(__dirname, './rxsrc')
 const distPath = path.join(__dirname, './dist')
 
 const webpackConfig = {

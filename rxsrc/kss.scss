@@ -9,4 +9,24 @@ $baseColor: #488ff9;
     left: 0;
     z-index: 100000000;
   }
+  #kscreenshotBox {
+    position: fixed;
+    background: transparent;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3);
+    z-index: 100000001;
+    #drawCanvas{
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      cursor: move;
+      position: absolute;
+      z-index: 99;
+    }
+    .kssDot, .kssLine{
+      position: absolute;
+      background: $baseColor;
+      z-index: 100;
+    }
+  }
 }

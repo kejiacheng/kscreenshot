@@ -1,4 +1,4 @@
-import { from } from 'rxjs';
+import { from } from 'rxjs'
 
 export function css (dom, obj) {
   for (let i in obj) {
