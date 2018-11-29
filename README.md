@@ -48,7 +48,7 @@ new kscreenshot(
     <td>65</td>
   </tr>
   <tr>
-    <td>toolshow</td>
+    <td>toolShow</td>
     <td>工具栏各个工具显示(具体见下面toolshow配置)</td>
     <td>object</td>
     <td>默认每个工具都显示</td>
@@ -79,7 +79,7 @@ new kscreenshot(
   </tr> 
 </table>
 
-#### toolshow配置
+#### toolShow配置
 <table>
   <tr>
     <th>参数</th>
