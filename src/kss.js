@@ -1,6 +1,6 @@
 // import {a} from './toolbar.js'
 import html2canvas from './html2canvas.min.js'
-import { css, remove, domType, addClass } from './util'
+import { css, remove, domType, addClass, typeChecking } from './util'
 import createDragDom from './createDragDom.js'
 import createToolbar from './toolbar/toolbar.js'
 import drawMiddleImage from './toolbar/middleImage/drawMiddleImage'
@@ -11,8 +11,23 @@ import toolbarPosition from './toolbar/toolbarPosition'
 import cursorImg from './assets/imgs/cursor.ico'
 import './kss.scss'
 
+function initLineWidth (initLine) {
+    if (isNaN(initLine)) {
+        return 10
+    } else {
+        if (initLine > 10) {
+            return 10
+        } else if (initLine < 1) {
+            return 1
+        } else {
+            return initLine
+        }
+    }
+}
+
 let kss = (function () {
     let instance
+    
     //单例模式
     let kss = function (options) {
         if (instance) {
@@ -53,7 +68,8 @@ let kss = (function () {
         this.toolbarHeight = 30
         this.toolbarMarginTop = 5
         this.toolbarColor = '#fb3838'
-        this.toolbarLineWidth = 10
+        this.toolbarLineWidth = typeChecking(options.toolShow) === '[object Object]' ? initLineWidth(options.toolShow.drawLine) : 10
+        
 
         //工具栏事件
         this.toolmousedown = null

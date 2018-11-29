@@ -113,7 +113,7 @@ new kscreenshot(
   </tr>  
   <tr>
     <th>drawLine</th>
-    <th>控制线条按键显示</th>
+    <th>控制线条按键显示（可以输入数字，初始化线条粗细，[1-10]）</th>
     <th>bool</th>
     <th>true</th>
   </tr>  
