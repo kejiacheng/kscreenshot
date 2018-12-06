@@ -1,9 +1,7 @@
-import { remove, removeClass, typeChecking } from '../util'
+import { remove, removeClass } from '../util'
 
 export default function endAndClear (me) {
     removeClass(document.body, 'kssBody')
-    
-    const lastShot = me.snapshootList[me.snapshootList.length - 1]
     
     me.kss && remove(me.kss)
     me.kssScreenShotWrapper && remove(me.kssScreenShotWrapper)
@@ -27,6 +25,4 @@ export default function endAndClear (me) {
     }, 0)
     
     document.removeEventListener('mouseup', me.cancelDrawingStatus)
-    
-    typeChecking(me.endCB) === '[object Function]' && me.endCB(lastShot)
 }
