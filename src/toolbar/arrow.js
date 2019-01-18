@@ -1,10 +1,10 @@
 import { computed } from '../util'
 
 export default function arrow (startPos, endPos, triangle, me) {
-    let startX = startPos.x
-    let startY = startPos.y
-    let endX = endPos.x
-    let endY = endPos.y
+    let startX = startPos.x * me.scale
+    let startY = startPos.y * me.scale
+    let endX = endPos.x * me.scale
+    let endY = endPos.y * me.scale
     let MaxTwoSize = 20
 
     computed(triangle, 'distance', ['twoSide', 'bottomSide', 'crossWidth'], [function (obj, baseValue, changeProperty) {

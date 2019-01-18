@@ -40,6 +40,7 @@ let kss = (function () {
         this.kssTextLayer = null
         this.rectangleCanvas = null
         this.toolbar = null
+        this.scale = window.devicePixelRatio || 1
         //存储当前快照的元素
         this.currentImgDom = null
         //截图状态

@@ -60,7 +60,7 @@ export default function drawLineBT (me) {
             }
             let context = me.rectangleCanvas.getContext("2d")
             context.beginPath()
-            context.moveTo(e.clientX - me.startX, e.clientY - me.startY)
+            context.moveTo((e.clientX - me.startX) * me.scale, (e.clientY - me.startY) * me.scale)
             
             context.strokeStyle = me.toolbarColor
      
@@ -71,7 +71,7 @@ export default function drawLineBT (me) {
 
             function drawLineMousemoveEvent (e) {
                 context.lineWidth = me.toolbarLineWidth
-                context.lineTo(e.clientX - me.startX, e.clientY - me.startY)
+                context.lineTo((e.clientX - me.startX) * me.scale, (e.clientY - me.startY) * me.scale)
                 context.stroke()  
             }
             

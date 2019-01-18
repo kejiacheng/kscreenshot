@@ -95,7 +95,7 @@ export default function textBT (me) {
                         return
                     }
                     var context = me.rectangleCanvas.getContext('2d')
-                    context.font="16px 宋体"
+                    context.font=`${16 * me.scale}px 宋体`
                     let textPerLine = textarea.innerHTML.split('<div>')
                     let newTextPerLine = []
                     textPerLine.forEach((it, index) => {
@@ -126,7 +126,7 @@ export default function textBT (me) {
                     context.fillStyle = me.toolbarColor
                     newTextPerLine.forEach((it, index) => {
                           
-                        context.fillText(it, startX - offsetX, startY - offsetY + 15 + (index * 18))
+                        context.fillText(it, (startX - offsetX) * me.scale, (startY - offsetY + 15 + (index * 18)) * me.scale)
                     })
                     
                     makeSnapShoot(me)

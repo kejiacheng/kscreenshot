@@ -73,11 +73,11 @@ export default function rectBT (me) {
                 endY -= me.startY
 
                 context.beginPath()
-                context.moveTo(Math.min(startX, endX), Math.min(startY, endY))
-                context.lineTo(Math.max(startX, endX), Math.min(startY, endY))
-                context.lineTo(Math.max(startX, endX), Math.max(startY, endY))
-                context.lineTo(Math.min(startX, endX), Math.max(startY, endY))
-                context.lineTo(Math.min(startX, endX), Math.min(startY, endY))
+                context.moveTo(Math.min(startX, endX) * me.scale, Math.min(startY, endY) * me.scale)
+                context.lineTo(Math.max(startX, endX) * me.scale, Math.min(startY, endY) * me.scale)
+                context.lineTo(Math.max(startX, endX) * me.scale, Math.max(startY, endY) * me.scale)
+                context.lineTo(Math.min(startX, endX) * me.scale, Math.max(startY, endY) * me.scale)
+                context.lineTo(Math.min(startX, endX) * me.scale, Math.min(startY, endY) * me.scale)
                 context.lineWidth = 1
                 context.strokeStyle = me.toolbarColor
                 context.stroke()  
