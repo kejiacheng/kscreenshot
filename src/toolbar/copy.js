@@ -7,6 +7,7 @@ export default function copy (me, url) {
     })
 
     let img = document.createElement('img')
+   
 
     let absolutePath
     if (typeChecking(me.copyPath) === '[object Function]') {
@@ -23,8 +24,12 @@ export default function copy (me, url) {
 
     imgWrapper.appendChild(img)
     document.body.appendChild(imgWrapper)
-
     setTimeout(function () {
+        css(img, {
+            width: img.width / me.scale + 'px',
+            height: img.height / me.scale + 'px'
+        })
+
         let selection = window.getSelection()
         let range = document.createRange()
 
