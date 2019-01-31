@@ -164,7 +164,7 @@ new kscreenshot(
 </table>
 
 
-### 结合electron、NW等前端桌面开发库可实现整个显示屏截图
+### 结合NW等前端桌面开发库可实现整个显示屏截图
 
 #### 实现demo图
 
