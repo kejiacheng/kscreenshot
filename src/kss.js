@@ -10,7 +10,9 @@ import backRightClient from './backRightClient'
 import toolbarPosition from './toolbar/toolbarPosition'
 import cursorImg from './assets/imgs/cursor.ico'
 import './kss.scss'
-
+if (window) {
+    window = global
+}
 function initLineWidth (initLine) {
     if (isNaN(initLine)) {
         return 10
