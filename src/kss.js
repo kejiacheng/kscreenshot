@@ -10,9 +10,7 @@ import backRightClient from './backRightClient'
 import toolbarPosition from './toolbar/toolbarPosition'
 import cursorImg from './assets/imgs/cursor.ico'
 import './kss.scss'
-if (window) {
-    window = global
-}
+
 function initLineWidth (initLine) {
     if (isNaN(initLine)) {
         return 10
@@ -320,14 +318,18 @@ let kss = (function () {
             return
         }
         that.isScreenshot = true
-        html2canvas(document.body, {useCORS:true})
+        html2canvas(document.body, {useCORS:true, scrollY:200})
             .then((canvas) => {
                 that.kss = canvas
+                that.scrollTop = document.documentElement.scrollTop
                 canvas.id = 'kss'
                     
                 document.body.appendChild(canvas)
 
                 addClass(document.body, 'kssBody')
+                css(canvas, {
+                    top: `-${that.scrollTop}px`
+                })
 
                 canvas.addEventListener('mousedown', that.startDrawDown)
             })

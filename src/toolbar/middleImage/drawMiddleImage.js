@@ -5,7 +5,7 @@ export default function drawMiddleImage(me) {
   ctx.drawImage(
     me.kss,
     me.startX * me.scale,
-    me.startY * me.scale,
+    me.startY * me.scale + me.scrollTop,
     me.width * me.scale,
     me.height * me.scale,
     0,
