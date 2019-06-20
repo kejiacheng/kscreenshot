@@ -21,6 +21,7 @@ export default function quitBT (me) {
         me.isEdit = true
         
         endAndClear(me)
+        me.cancelCB()
     })
 
     return quitBT

@@ -67,7 +67,13 @@ new kscreenshot(
   </tr> 
   <tr>
     <td>endCB</td>
-    <td>结束截图后的回调函数</td>
+    <td>成功结束截图后的回调函数</td>
+    <td>Function</td>
+    <td>noob</td>
+  </tr> 
+  <tr>
+    <td>cancelCB</td>
+    <td>撤销截图后的回调函数</td>
     <td>Function</td>
     <td>noob</td>
   </tr> 

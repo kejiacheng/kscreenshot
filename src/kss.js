@@ -82,8 +82,10 @@ let kss = (function () {
         //是否下载
         this.needDownload = options.needDownload
 
-        //回调
+        //成功回调
         this.endCB = options.endCB
+        //撤销回调
+        this.cancelCB = options.cancelCB
         
         this.startDrawDown = (e) => {
             const that = this
@@ -261,6 +263,7 @@ let kss = (function () {
                     }, 0)
                     
                     endAndClear(that)
+                    that.cancelCB()
                     return
                 }
                 remove(that.kssScreenShotWrapper)
@@ -337,14 +340,15 @@ let kss = (function () {
 
     kss.prototype.end = function () {
         const that = this
-        document.addEventListener('keydown', endScreenShot)
-
-        function endScreenShot (e) {
+     
+        that.endScreenShot = function (e) {
             if (e.keyCode === 27) {
                 endAndClear(that)
-                document.removeEventListener('keydown', endScreenShot)
+                that.cancelCB()
             }
         }
+
+        document.addEventListener('keydown', that.endScreenShot)
     }
 
     return kss

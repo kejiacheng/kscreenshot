@@ -23,6 +23,6 @@ export default function endAndClear (me) {
     setTimeout(function () {
         document.removeEventListener('contextmenu', me.preventContextMenu)
     }, 0)
-    
+    document.removeEventListener('keydown', me.endScreenShot)
     document.removeEventListener('mouseup', me.cancelDrawingStatus)
 }
