@@ -73,7 +73,7 @@ new kscreenshot(
   </tr> 
   <tr>
     <td>cancelCB</td>
-    <td>撤销截图后的回调函数</td>
+    <td>撤销截图后的回调函数（关闭按钮，esq，鼠标右键）</td>
     <td>Function</td>
     <td>noob</td>
   </tr> 
