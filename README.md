@@ -1,7 +1,7 @@
 kscreenshot
 ===========
 
-这是一款实用的web前端截图工具。
+由于该插件还存在问题，不推荐在项目中使用该插件。
 
 ![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot1.gif)
 ![](https://github.com/kejiacheng/img/blob/master/kscreenshot/screenshot2.gif)
